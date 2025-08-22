@@ -29,4 +29,6 @@ add_executable(Practica1EDD main.cpp
         Iteradores/IteradorLED/IteradorLED.h
         Iteradores/IteradorMatriz/IteradorMatriz.cpp
         Iteradores/IteradorMatriz/IteradorMatriz.h
+        Juego/CreadorDeMatriz/CreadorDeMatriz.cpp
+        Juego/CreadorDeMatriz/CreadorDeMatriz.h
 )

@@ -28,7 +28,6 @@ ColaConArreglo<T>::~ColaConArreglo() {
     }
     delete[] this->elementos;
     this->elementos = nullptr;
-    cout << "Cola destruida" << endl;
 }
 
 template<typename T>

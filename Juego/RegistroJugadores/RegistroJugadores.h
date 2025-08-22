@@ -14,7 +14,7 @@
 class RegistroJugadores {
 private:
     const int minimoJugadores = 2;
-    const int maximoJugadores = 6;
+    int maximoJugadores;
     ListaDobleEnlazada<Color::Tipo>* coloresDisponibles;
     ColaConArreglo<Jugador> *jugadores = nullptr;
     void pedirNumeroJugadores();
@@ -23,7 +23,7 @@ private:
     Color::Tipo* obtenerColorAleatorio();
     bool caracterEstaApartado(char c);
 public:
-    RegistroJugadores();
+    RegistroJugadores(int limiteJugadores);
     ~RegistroJugadores();
     ColaConArreglo<Jugador> *registrarJugadores();
 };

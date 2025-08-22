@@ -13,7 +13,6 @@ Jugador::Jugador(std::string nombre, char inicial, Color::Tipo *color) {
 }
 
 Jugador::~Jugador() {
-    std::cout << "borrando a " << this->nombre << std::endl;
     delete color;
 }
 

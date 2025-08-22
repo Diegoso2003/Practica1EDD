@@ -4,7 +4,8 @@
 
 #include "RegistroJugadores.h"
 
-RegistroJugadores::RegistroJugadores() {
+RegistroJugadores::RegistroJugadores(int limiteJugadores) {
+    this->maximoJugadores = limiteJugadores;
     coloresDisponibles = new ListaDobleEnlazada<Color::Tipo>;
     inicializarColoresDisponibles();
 }
@@ -87,7 +88,7 @@ void RegistroJugadores::pedirNumeroJugadores() {
         if (hayError) {
             std::cout << "Ingrese los datos solicitados correctamente" << std::endl;
         }
-        std::cout << "Ingrese el numero de jugadores, max: 6, min: 2" << std::endl;
+        std::cout << "Ingrese el numero de jugadores, max: "<<maximoJugadores<<", min: "<< minimoJugadores<< std::endl;
         std::getline(std::cin, entrada);
 
         try {

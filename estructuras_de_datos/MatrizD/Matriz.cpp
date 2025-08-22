@@ -56,7 +56,6 @@ void Matriz<T>::llenarMatriz(ListaDobleEnlazada<T> *lista) {
                 T* elemento = lista->eliminar(1);
                 int* fila = ultimaFila->getFila();
                 int* columna = nodoAuxiliar->getColumna();
-                std::cout << "fila: " << *fila << ", columna: " << *columna << std::endl;
                 NodoMatriz<T> *nodoNuevo = new NodoMatriz<T>(elemento, fila, columna);
                 ultimoNodoAgregado->setDerecha(nodoNuevo);
                 nodoNuevo->setIzquierda(ultimoNodoAgregado);

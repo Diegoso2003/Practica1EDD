@@ -13,5 +13,8 @@ int main() {
     std::cout << "•  •  •  •" << std::endl;
     std::cout << "" << std::endl;
     std::cout << "•  •  •  •" << std::endl;
+    TotitoChino *juego = new TotitoChino();
+    juego->iniciarJuego();
+    delete juego;
     return 0;
 }

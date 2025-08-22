@@ -9,11 +9,13 @@
 #include "../estructuras_de_datos/Cola/ColaConArreglo.h"
 #include "Jugador/Jugador.h"
 #include "RegistroJugadores/RegistroJugadores.h"
+#include "CreadorDeMatriz/CreadorDeMatriz.h"
 
 class TotitoChino {
 private:
-
+    Matriz<std::string> *matrizPuntos;
     ColaConArreglo<Jugador> *jugadores;
+    void darDescripcion();
 public:
     TotitoChino();
     ~TotitoChino();
