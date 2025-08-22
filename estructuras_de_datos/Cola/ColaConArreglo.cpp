@@ -10,10 +10,13 @@ using namespace std;
 template<typename T>
 ColaConArreglo<T>::ColaConArreglo(int capacidad){
     this->elementos = new T*[capacidad];
+    for (int i = 0; i < capacidad; i++) {
+        this->elementos[i] = nullptr;
+    }
     this->capacidad = capacidad;
     this->inicio = 0;
     this->final = 0;
-    this->elementosTotales = 0;
+    this->tamaño = 0;
 }
 
 template<typename T>
@@ -30,9 +33,9 @@ ColaConArreglo<T>::~ColaConArreglo() {
 
 template<typename T>
 void ColaConArreglo<T>::agregarALaCola(T *elemento) {
-    if (elementosTotales < this->capacidad) {
+    if (tamaño < this->capacidad) {
         this->elementos[final++] = elemento;
-        elementosTotales++;
+        tamaño++;
         if (final == this->capacidad) {
             final = 0;
         }
@@ -43,9 +46,10 @@ void ColaConArreglo<T>::agregarALaCola(T *elemento) {
 
 template<typename T>
 T* ColaConArreglo<T>::SacarAlPrimero() {
-    if (elementosTotales > 0) {
-        elementosTotales--;
-        T* elemento = elementos[inicio++];
+    if (tamaño > 0) {
+        tamaño--;
+        T* elemento = elementos[inicio];
+        this-elementos[inicio++] = nullptr;
         if (inicio == this->capacidad) {
             inicio = 0;
         }
@@ -63,7 +67,7 @@ void ColaConArreglo<T>::imprimir(int principio, int final) {
 
 template<typename T>
 void ColaConArreglo<T>::mostrarCola() {
-    if (elementosTotales > 0) {
+    if (tamaño > 0) {
         if (inicio < final) {
             imprimir(inicio, final);
         } else {
@@ -77,4 +81,20 @@ void ColaConArreglo<T>::mostrarCola() {
         cout << "Cola vacia" << endl;
     }
 }
+
+template<typename T>
+int ColaConArreglo<T>::getCapacidad() const {
+    return capacidad;
+}
+
+template<typename T>
+int ColaConArreglo<T>::getTamaño() const {
+    return tamaño;
+}
+
+template<typename T>
+T **ColaConArreglo<T>::getElementos() const {
+    return elementos;
+}
+
 #endif

@@ -12,7 +12,7 @@ private:
     int inicio;
     int final;
     int capacidad;
-    int elementosTotales;
+    int tamaño;
     void imprimir(int principio, int final);
 public:
     ColaConArreglo(int capacidad);
@@ -20,6 +20,9 @@ public:
     void agregarALaCola(T *elemento);
     T* SacarAlPrimero();
     void mostrarCola();
+    int getCapacidad() const;
+    int getTamaño() const;
+    T** getElementos() const;
 };
 
 #include "ColaConArreglo.cpp"

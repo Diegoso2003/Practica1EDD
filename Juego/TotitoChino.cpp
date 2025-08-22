@@ -4,30 +4,15 @@
 
 #include "TotitoChino.h"
 
+TotitoChino::TotitoChino() : jugadores(nullptr) {}
+
 TotitoChino::~TotitoChino() {
     delete jugadores;
 }
 
-int TotitoChino::pedirNumeroDeJugadores() {
-    std::string entrada;
-    int numero;
-    bool hecho = false;
-    do {
-        std::cout << "Ingrese el numero de jugadores para empezar: " << std::endl;
-        std::getline(std::cin, entrada);
-
-        try {
-            numero = std::stoi(entrada);
-            hecho = numero >= minimoJugadores && numero <= maximoJugadores;
-        } catch (const std::exception& e) {
-            std::cout << "¡Error! Entrada no válida.\n";
-        }
-    } while (!hecho);
-    return numero;
-}
-
-
 void TotitoChino::iniciarJuego() {
-    int totalJugadores = pedirNumeroDeJugadores();
-    jugadores = new ColaConArreglo<Jugador>(totalJugadores);
+    auto* registro = new RegistroJugadores();
+    jugadores = registro->registrarJugadores();
+    std::cout << "registro hecho" << std::endl;
+    delete registro;
 }

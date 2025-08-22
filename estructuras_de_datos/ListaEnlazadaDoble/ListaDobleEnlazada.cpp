@@ -89,6 +89,12 @@ T *ListaDobleEnlazada<T>::eliminar(int posicion) {
     if (nodo != nullptr) {
         NodoDoble<T>* anterior = nodo->getAnterior();
         NodoDoble<T>* siguiente = nodo->getSiguiente();
+        if (posicion == 1) {
+            primero = siguiente;
+        }
+        if (posicion == tamaño) {
+            ultimo = anterior;
+        }
         if (anterior != nullptr) {
             anterior->setSiguiente(siguiente);
         }
@@ -104,5 +110,14 @@ T *ListaDobleEnlazada<T>::eliminar(int posicion) {
     return nullptr;
 }
 
+template<typename T>
+int ListaDobleEnlazada<T>::getTamaño() const {
+    return tamaño;
+}
+
+template<typename T>
+IteradorLED<T> *ListaDobleEnlazada<T>::getIterador() {
+    return new IteradorLED<T>(primero);
+}
 
 #endif

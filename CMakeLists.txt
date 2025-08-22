@@ -18,4 +18,15 @@ add_executable(Practica1EDD main.cpp
         Juego/Jugador/Jugador.h
         Juego/TotitoChino.cpp
         Juego/TotitoChino.h
+        estructuras_de_datos/MatrizD/NodoMatriz/NodoMatriz.cpp
+        estructuras_de_datos/MatrizD/NodoMatriz/NodoMatriz.h
+        Juego/Color.h
+        Juego/RegistroJugadores/RegistroJugadores.cpp
+        Juego/RegistroJugadores/RegistroJugadores.h
+        estructuras_de_datos/MatrizD/Matriz.cpp
+        estructuras_de_datos/MatrizD/Matriz.h
+        Iteradores/IteradorLED/IteradorLED.cpp
+        Iteradores/IteradorLED/IteradorLED.h
+        Iteradores/IteradorMatriz/IteradorMatriz.cpp
+        Iteradores/IteradorMatriz/IteradorMatriz.h
 )

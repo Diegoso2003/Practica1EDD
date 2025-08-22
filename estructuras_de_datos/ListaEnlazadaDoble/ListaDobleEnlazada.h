@@ -5,6 +5,7 @@
 #ifndef PRACTICA1EDD_LISTA_DOBLE_ENLAZADA_H
 #define PRACTICA1EDD_LISTA_DOBLE_ENLAZADA_H
 #include "NodoDoble.h"
+#include "../../Iteradores/IteradorLED/IteradorLED.h"
 
 template<typename T>
 class ListaDobleEnlazada {
@@ -22,6 +23,8 @@ public:
     void agregar(T* elemento);
     T* obtener(int posicion);
     T* eliminar(int posicion);
+    int getTamaño() const;
+    IteradorLED<T> *getIterador();
 };
 
 #include "ListaDobleEnlazada.cpp"

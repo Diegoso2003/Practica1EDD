@@ -6,23 +6,18 @@
 
 #include <iostream>
 
-Jugador::Jugador(std::string nombre, char inicial, std::string color) {
+Jugador::Jugador(std::string nombre, char inicial, Color::Tipo *color) {
     this->nombre = nombre;
     this->inicial = inicial;
     this->color = color;
 }
 
-Jugador::Jugador() {
-    this->nombre = "";
-    this->inicial = 0;
-    this->color = "";
-}
-
 Jugador::~Jugador() {
     std::cout << "borrando a " << this->nombre << std::endl;
+    delete color;
 }
 
-std::string Jugador::getColor() const {
+Color::Tipo *Jugador::getColor() const {
     return this->color;
 }
 

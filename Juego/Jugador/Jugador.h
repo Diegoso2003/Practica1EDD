@@ -6,18 +6,19 @@
 #define PRACTICA1EDD_JUGADOR_H
 #include <string>
 
+#include "../Color.h"
+
 
 class Jugador {
 private:
     std::string nombre;
     char inicial;
-    std::string color;
+    Color::Tipo* color;
 public:
-    Jugador();
-    Jugador(std::string nombre, char inicial, std::string color);
+    Jugador(std::string nombre, char inicial, Color::Tipo *color);
     ~Jugador();
     std::string getNombre() const;
-    std::string getColor() const;
+    Color::Tipo *getColor() const;
     char getInicial() const;
 };
 

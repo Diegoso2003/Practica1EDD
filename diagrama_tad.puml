@@ -1,0 +1,57 @@
+@startuml TotitoChino
+
+class Jugador{
+    -inicial: char
+    -nombre: string
+    -color: Tipo
+    -pilaPowerUps: Pila
+    +Jugador(c: char, nombre: string, color: Tipo)
+}
+
+class TotitoChino{
+    -cambiarTurno: boolean
+    +setCambiarTurno(turno : boolean) void
+}
+
+abstract class PowerUp{
+    -simboloTablero: string
+    #realizarAccion(juego TotitoChino): void
+    +getSimboloTablero(): string
+}
+
+class DobleLinea{
+    -darTurnoExtra(juego: TotitoChino): void
+}
+
+class TrampaSecreta{
+    -asignarTrampaUltimaLinea(juego: TotitoChino): void
+}
+
+class Bloqueo{
+    -denegarCierreCuadro(juego: TotitoChino): void
+}
+
+class Pase{
+    -saltarTurno(juego: TotitoChino): void
+}
+
+class LlaveSecreta{
+    -denegarBloqueo(juego: TotitoChino): void
+}
+
+class UnionAFuturo{
+    -darPuntoExtra(juego: TotitoChino): void
+}
+
+class Linea{
+    -powerUp: PowerUp
+    -jugador: Jugador
+}
+
+DobleLinea --|> PowerUp : extends
+TrampaSecreta --|> PowerUp : extends
+Bloqueo --|> PowerUp : extends
+Pase --|> PowerUp : extends
+LlaveSecreta --|> PowerUp : extends
+UnionAFuturo --|> PowerUp : extends
+@enduml
