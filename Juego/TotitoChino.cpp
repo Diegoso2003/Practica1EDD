@@ -3,6 +3,7 @@
 //
 
 #include "TotitoChino.h"
+#include "RegistroJugadores/RegistroJugadores.h"
 
 TotitoChino::TotitoChino() : jugadores(nullptr), matrizPuntos(nullptr) {}
 
@@ -26,6 +27,36 @@ void TotitoChino::darDescripcion() {
     cout<<"\tTurno extra"<<endl<<endl;
 }
 
+void TotitoChino::imprimirTablero() {
+    cout<<"Tablero:"<<endl;
+    IteradorMatriz<Punto> *puntos = matrizPuntos->getIteradorMatriz();
+    puntos->haySiguiente();
+    std::cout << "   ";
+    for (int i = 0; i <= matrizPuntos->getFila(); i++) {
+        if (i !=0) {
+            std::cout << std::to_string(i) << (i < 10 ? "  " : " ");
+        }
+        for (int j = 1; j <= matrizPuntos->getColumna(); j++) {
+            if (i == 0) {
+                std::cout << std::to_string((j)) << (j < 10 ? "- " : "-");
+            } else {
+            Punto *puntoActual = puntos->getActual();
+            int posicionActual[2];
+            puntos->getPosicionActual(posicionActual);
+            if (posicionActual[1] != j ) {
+                std::cout << "   ";
+            } else {
+                puntoActual->imprimir();
+                if (!puntos->haySiguiente()) {
+                    break;
+                }
+            }
+            }
+        }
+        std::cout << endl;
+    }
+    delete puntos;
+}
 
 void TotitoChino::iniciarJuego() {
     darDescripcion();
@@ -33,7 +64,7 @@ void TotitoChino::iniciarJuego() {
     matrizPuntos = creadorMatriz->crearMatriz();
     auto* registro = new RegistroJugadores(creadorMatriz->getLimiteJugadores());
     jugadores = registro->registrarJugadores();
-    matrizPuntos->imprimir();
+    imprimirTablero();
     delete registro;
     delete creadorMatriz;
 }

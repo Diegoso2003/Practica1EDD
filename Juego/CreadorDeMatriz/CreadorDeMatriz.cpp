@@ -32,10 +32,10 @@ bool CreadorDeMatriz::esNumeroFilasInvalido(int &numero) const {
     return numero > maximoFilas || numero < minimoFilas;
 }
 
-ListaDobleEnlazada<std::string> *CreadorDeMatriz::crearPuntos(int &puntosTotales) {
-    ListaDobleEnlazada<std::string> *listaDoble = new ListaDobleEnlazada<std::string>();
+ListaDobleEnlazada<Punto> *CreadorDeMatriz::crearPuntos(int &puntosTotales) {
+    auto *listaDoble = new ListaDobleEnlazada<Punto>();
     for (int i = 0; i < puntosTotales; i++) {
-        listaDoble->agregar(new std::string("•"));
+        listaDoble->agregar(new Punto);
     }
     return listaDoble;
 }
@@ -55,7 +55,7 @@ void CreadorDeMatriz::calcularMaximoJugadores(int &puntosTotales) {
 }
 
 
-Matriz<std::string> *CreadorDeMatriz::crearMatriz() {
+Matriz<Punto> *CreadorDeMatriz::crearMatriz() {
     bool hayError = false;
     int filas;
     int columnas;
@@ -78,8 +78,8 @@ Matriz<std::string> *CreadorDeMatriz::crearMatriz() {
         hayError = esNumeroFilasInvalido(filas);
     }while (hayError);
     int totalPuntos = filas * columnas;
-    ListaDobleEnlazada<std::string> *listaDoble = crearPuntos(totalPuntos);
-    Matriz<std::string> *matriz = new Matriz<std::string>(filas, columnas, listaDoble);
+    auto *listaDoble = crearPuntos(totalPuntos);
+    auto *matriz = new Matriz<Punto>(filas, columnas, listaDoble);
     delete listaDoble;
     calcularMaximoJugadores(totalPuntos);
     return matriz;

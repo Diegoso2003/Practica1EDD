@@ -19,8 +19,10 @@ private:
     int columna;
     int tamaño = 0;
     void llenarMatriz(ListaDobleEnlazada<T> *lista);
-    void agregarNuevaFilaAbajo();
-    void agregarNuevaColumnaDerecha();
+    void agregarNuevaFilaAbajo(int fila);
+    void agregarNuevaColumnaDerecha(int columna);
+    NodoMatriz<T> *buscarFila(int fila, bool crear);
+    NodoMatriz<T> *buscarColumna(int columna, bool crear);
 public:
     Matriz();
     Matriz(int filas, int columnas, ListaDobleEnlazada<T> *lista);
@@ -29,7 +31,8 @@ public:
     T* getElemento(int fila, int columna);
     IteradorMatriz<T> *getIteradorMatriz(){return new IteradorMatriz<T>(cabecera);}
     void agregar(T *elemento, int fila, int columna);
-    void imprimir();
+    int getFila() const{return fila;}
+    int getColumna() const{return columna;}
 };
 
 #include "Matriz.cpp"

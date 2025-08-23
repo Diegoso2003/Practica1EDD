@@ -5,17 +5,17 @@
 #ifndef PRACTICA1EDD_TOTITO_CHINO_H
 #define PRACTICA1EDD_TOTITO_CHINO_H
 
-#include "Color.h"
 #include "../estructuras_de_datos/Cola/ColaConArreglo.h"
 #include "Jugador/Jugador.h"
-#include "RegistroJugadores/RegistroJugadores.h"
 #include "CreadorDeMatriz/CreadorDeMatriz.h"
+#include "Punto/Punto.h"
 
 class TotitoChino {
 private:
-    Matriz<std::string> *matrizPuntos;
+    Matriz<Punto> *matrizPuntos;
     ColaConArreglo<Jugador> *jugadores;
     void darDescripcion();
+    void imprimirTablero();
 public:
     TotitoChino();
     ~TotitoChino();

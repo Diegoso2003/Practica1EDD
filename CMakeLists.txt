@@ -31,4 +31,8 @@ add_executable(Practica1EDD main.cpp
         Iteradores/IteradorMatriz/IteradorMatriz.h
         Juego/CreadorDeMatriz/CreadorDeMatriz.cpp
         Juego/CreadorDeMatriz/CreadorDeMatriz.h
+        Juego/Punto/Punto.cpp
+        Juego/Punto/Punto.h
+        Juego/Linea/Linea.cpp
+        Juego/Linea/Linea.h
 )

@@ -14,7 +14,8 @@ private:
 public:
     IteradorMatriz(NodoMatriz<T> *cabecera):filaActual(cabecera), actual(nullptr) {}
     bool haySiguiente();
-    NodoMatriz<T> *getActual(){return actual;}
+    T *getActual(){return actual->getElemento();}
+    void getPosicionActual(int *posicionActual);
 };
 
 #include "IteradorMatriz.cpp"

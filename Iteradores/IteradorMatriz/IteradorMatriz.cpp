@@ -4,6 +4,7 @@
 #ifndef PRACTICA1EDD_ITERADOR_MATRIZ_CPP
 #define PRACTICA1EDD_ITERADOR_MATRIZ_CPP
 #include "IteradorMatriz.h"
+#include <array>
 
 template<typename T>
 bool IteradorMatriz<T>::haySiguiente(){
@@ -22,6 +23,17 @@ bool IteradorMatriz<T>::haySiguiente(){
         return actual == nullptr ? haySiguiente(): true;
     }
 }
+
+template<typename T>
+void IteradorMatriz<T>::getPosicionActual(int *posicionActual) {
+    posicionActual[0] = -1;
+    posicionActual[1] = -1;
+    if (actual != nullptr) {
+        posicionActual[0] = *actual->getFila();
+        posicionActual[1] = *actual->getColumna();
+    }
+}
+
 
 
 #endif
