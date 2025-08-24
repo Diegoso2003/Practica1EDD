@@ -35,8 +35,6 @@ add_executable(Practica1EDD main.cpp
         Juego/Punto/Punto.h
         Juego/Linea/Linea.cpp
         Juego/Linea/Linea.h
-        estructuras_de_datos/MatrizD/ListaMatriz/ListaMatriz.cpp
-        estructuras_de_datos/MatrizD/ListaMatriz/ListaMatriz.h
         Juego/PowerUp/PowerUp.cpp
         Juego/PowerUp/PowerUp.h
         Juego/PowerUp/DobleLinea/DobleLinea.cpp
@@ -63,4 +61,10 @@ add_executable(Practica1EDD main.cpp
         Juego/CreadorDePowerUps/CreadorPowerUps.h
         Juego/Casilla/Casilla.cpp
         Juego/Casilla/Casilla.h
+        estructuras_de_datos/MatrizD/AgregarMatriz/AgregadorMatriz.cpp
+        estructuras_de_datos/MatrizD/AgregarMatriz/AgregadorMatriz.h
+        estructuras_de_datos/MatrizD/BuscadorMatriz/BuscadorMatriz.cpp
+        estructuras_de_datos/MatrizD/BuscadorMatriz/BuscadorMatriz.h
+        estructuras_de_datos/MatrizD/EliminadorMatriz/EliminadorMatriz.cpp
+        estructuras_de_datos/MatrizD/EliminadorMatriz/EliminadorMatriz.h
 )

@@ -6,22 +6,21 @@
 #define PRACTICA1EDD_MATRIZ_H
 #include "../../Iteradores/IteradorMatriz/IteradorMatriz.h"
 #include "../ListaEnlazadaDoble/ListaDobleEnlazada.h"
-#include "ListaMatriz/ListaMatriz.h"
+#include "AgregarMatriz/AgregadorMatriz.h"
+#include "BuscadorMatriz/BuscadorMatriz.h"
 
 template<typename T>
 class Matriz {
 private:
-    ListaMatriz<T> *cabecera;
-    ListaMatriz<T> *ultimaFila;
-    ListaMatriz<T> *ultimaColumna;
+    NodoMatriz<T> *cabecera;
+    NodoMatriz<T> *ultimaFila;
+    NodoMatriz<T> *ultimaColumna;
+    BuscadorMatriz<T> *buscador;
+    AgregadorMatriz<T> *agregador;
     int fila;
     int columna;
     int tamaño = 0;
     void llenarMatriz(ListaDobleEnlazada<T> *lista);
-    void agregarNuevaFilaAbajo(int fila);
-    void agregarNuevaColumnaDerecha(int columna);
-    ListaMatriz<T> *buscarFila(int fila, bool crear);
-    ListaMatriz<T> *buscarColumna(int columna, bool crear);
 public:
     Matriz();
     Matriz(int filas, int columnas, ListaDobleEnlazada<T> *lista);
@@ -32,6 +31,13 @@ public:
     void agregar(T *elemento, int fila, int columna);
     int getFila() const{return fila;}
     int getColumna() const{return columna;}
+    NodoMatriz<T> * getUltimaFila() const {return ultimaFila;}
+    NodoMatriz<T> * getUltimaColumna() const {return ultimaColumna;}
+    NodoMatriz<T> * getCabecera() const {return cabecera;}
+    void setUltimaFila(NodoMatriz<T> *ultima_fila) {ultimaFila = ultima_fila;}
+    void setUltimaColumna(NodoMatriz<T> *ultima_columna) {ultimaColumna = ultima_columna;}
+    BuscadorMatriz<T> * getBuscador() const {return buscador;}
+    AgregadorMatriz<T> * getAgregador() const {return agregador;}
 };
 
 #include "Matriz.cpp"

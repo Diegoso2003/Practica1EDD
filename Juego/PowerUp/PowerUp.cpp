@@ -4,7 +4,7 @@
 
 #include "PowerUp.h"
 #include <iostream>
-const std::string simbolos[] =
+const std::string PowerUp::simbolos[10] =
     {"DL", "TS", "BL", "PS", "LS", "ES", "UF", "AC", "NT", "EX"};
 
 PowerUp::PowerUp(int posicion) {

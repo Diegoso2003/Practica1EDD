@@ -11,7 +11,7 @@
 
 class PowerUp {
 private:
-    static const std::string simbolos[];
+    static const std::string simbolos[10];
     const std::string *simboloTablero;
 public:
     PowerUp(int posicion);

@@ -17,49 +17,24 @@ NodoMatriz<T>::NodoMatriz(T *elemento, int *fila, int *columna) {
 }
 
 template<typename T>
+NodoMatriz<T>::NodoMatriz(T *elemento) {
+    this->elemento = elemento;
+    this->fila = nullptr;
+    this->columna = nullptr;
+    this->abajo = nullptr;
+    this->derecha = nullptr;
+    this->izquierda = nullptr;
+    this->arriba = nullptr;
+}
+
+template<typename T>
 NodoMatriz<T>::~NodoMatriz() {
     delete elemento;
     delete derecha;
+    if (elemento == nullptr) {
+        delete fila;
+        delete columna;
+    }
 }
 
-
-template<typename T>
-NodoMatriz<T> *NodoMatriz<T>::getAbajo() {
-    return abajo;
-}
-
-template<typename T>
-NodoMatriz<T> *NodoMatriz<T>::getIzquierda() {
-    return izquierda;
-}
-
-template<typename T>
-NodoMatriz<T> *NodoMatriz<T>::getArriba() {
-    return arriba;
-}
-
-template<typename T>
-NodoMatriz<T> *NodoMatriz<T>::getDerecha() {
-    return derecha;
-}
-
-template<typename T>
-void NodoMatriz<T>::setAbajo(NodoMatriz<T> *abajo) {
-    this->abajo = abajo;
-}
-
-template<typename T>
-void NodoMatriz<T>::setArriba(NodoMatriz<T> *arriba) {
-    this->arriba = arriba;
-}
-
-template<typename T>
-void NodoMatriz<T>::setIzquierda(NodoMatriz<T> *izquierda) {
-    this->izquierda = izquierda;
-}
-
-template<typename T>
-void NodoMatriz<T>::setDerecha(NodoMatriz<T> *derecha) {
-    this->derecha = derecha;
-}
 #endif
