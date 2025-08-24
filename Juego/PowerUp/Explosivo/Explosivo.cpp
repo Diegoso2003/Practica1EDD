@@ -3,3 +3,7 @@
 //
 
 #include "Explosivo.h"
+
+Explosivo::Explosivo() : PowerUp(9) {
+
+}

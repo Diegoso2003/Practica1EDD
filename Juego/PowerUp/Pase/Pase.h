@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_PASE_H
 #define PRACTICA1EDD_PASE_H
+#include "../PowerUp.h"
 
 
-class Pase {
+class Pase : public PowerUp{
+public:
+    Pase();
 };
 
 

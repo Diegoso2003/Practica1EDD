@@ -3,3 +3,7 @@
 //
 
 #include "LlaveSecreta.h"
+
+LlaveSecreta::LlaveSecreta() : PowerUp(4){
+
+}

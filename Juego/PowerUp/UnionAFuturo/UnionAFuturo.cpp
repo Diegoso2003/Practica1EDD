@@ -3,3 +3,6 @@
 //
 
 #include "UnionAFuturo.h"
+UnionAFuturo::UnionAFuturo() : PowerUp(6){
+
+}

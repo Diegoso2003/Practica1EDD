@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_BLOQUEO_H
 #define PRACTICA1EDD_BLOQUEO_H
+#include "../PowerUp.h"
 
 
-class Bloqueo {
+class Bloqueo : public PowerUp{
+public:
+    Bloqueo();
 };
 
 

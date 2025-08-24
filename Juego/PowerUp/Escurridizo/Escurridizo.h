@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_ESCURRIDIZO_H
 #define PRACTICA1EDD_ESCURRIDIZO_H
+#include "../PowerUp.h"
 
 
-class Escurridizo {
+class Escurridizo : public PowerUp{
+public:
+    Escurridizo();
 };
 
 

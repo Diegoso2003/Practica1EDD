@@ -20,6 +20,7 @@ public:
     std::string getNombre() const;
     Color::Tipo *getColor() const;
     char getInicial() const;
+    void imprimir();
 };
 
 

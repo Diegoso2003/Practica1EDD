@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_NUEVASTIERRAS_H
 #define PRACTICA1EDD_NUEVASTIERRAS_H
+#include "../PowerUp.h"
 
 
-class NuevasTierras {
+class NuevasTierras : public PowerUp{
+public:
+    NuevasTierras();
 };
 
 

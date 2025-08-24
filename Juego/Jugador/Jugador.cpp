@@ -27,3 +27,7 @@ char Jugador::getInicial() const {
 std::string Jugador::getNombre() const {
     return this->nombre;
 }
+
+void Jugador::imprimir() {
+    std::cout << Color::codigo(*this->color) << this->inicial << " " << Color::codigo(Color::Tipo::RESET);
+}

@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_TRAMPASECRETA_H
 #define PRACTICA1EDD_TRAMPASECRETA_H
+#include "../PowerUp.h"
 
 
-class TrampaSecreta {
+class TrampaSecreta : public PowerUp{
+public:
+    TrampaSecreta();
 };
 
 

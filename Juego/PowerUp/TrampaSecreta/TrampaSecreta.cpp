@@ -3,3 +3,6 @@
 //
 
 #include "TrampaSecreta.h"
+TrampaSecreta::TrampaSecreta() : PowerUp(1){
+
+}

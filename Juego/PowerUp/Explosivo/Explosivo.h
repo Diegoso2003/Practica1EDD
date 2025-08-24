@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_EXPLOSIVO_H
 #define PRACTICA1EDD_EXPLOSIVO_H
+#include "../PowerUp.h"
 
 
-class Explosivo {
+class Explosivo : public PowerUp{
+public:
+    Explosivo();
 };
 
 

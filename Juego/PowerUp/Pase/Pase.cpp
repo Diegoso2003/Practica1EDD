@@ -3,3 +3,6 @@
 //
 
 #include "Pase.h"
+Pase::Pase() : PowerUp(3){
+
+}

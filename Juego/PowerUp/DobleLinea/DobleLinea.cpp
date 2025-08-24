@@ -3,3 +3,7 @@
 //
 
 #include "DobleLinea.h"
+
+DobleLinea::DobleLinea() : PowerUp(0){
+
+}

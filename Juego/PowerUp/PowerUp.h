@@ -6,13 +6,18 @@
 #define PRACTICA1EDD_POWERUP_H
 #include <string>
 
+#include "../TotitoChino.h"
+
 
 class PowerUp {
-protected:
-    static const std::string simbolos[];
 private:
-    std::string simboloTablero;
+    static const std::string simbolos[];
+    const std::string *simboloTablero;
 public:
+    PowerUp(int posicion);
+    virtual ~PowerUp(){}
+    void imprimir();
+    virtual void activar(TotitoChino *juego) const = 0;
 };
 
 

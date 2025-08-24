@@ -3,3 +3,7 @@
 //
 
 #include "NuevasTierras.h"
+
+NuevasTierras::NuevasTierras() : PowerUp(8){
+
+}

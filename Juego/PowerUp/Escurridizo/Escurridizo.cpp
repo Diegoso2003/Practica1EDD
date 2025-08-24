@@ -3,3 +3,7 @@
 //
 
 #include "Escurridizo.h"
+
+Escurridizo::Escurridizo() : PowerUp(5) {
+
+}

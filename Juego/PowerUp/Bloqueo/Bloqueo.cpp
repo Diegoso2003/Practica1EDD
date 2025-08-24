@@ -3,3 +3,7 @@
 //
 
 #include "Bloqueo.h"
+
+Bloqueo::Bloqueo() : PowerUp(2){
+
+}

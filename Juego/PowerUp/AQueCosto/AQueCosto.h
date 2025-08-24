@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_AQUECOSTO_H
 #define PRACTICA1EDD_AQUECOSTO_H
+#include "../PowerUp.h"
 
 
-class AQueCosto {
+class AQueCosto : public PowerUp{
+public:
+    AQueCosto();
 };
 
 

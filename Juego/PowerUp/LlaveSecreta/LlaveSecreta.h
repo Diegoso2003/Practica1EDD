@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_LLAVESECRETA_H
 #define PRACTICA1EDD_LLAVESECRETA_H
+#include "../PowerUp.h"
 
 
-class LlaveSecreta {
+class LlaveSecreta : public PowerUp{
+public:
+    LlaveSecreta();
 };
 
 

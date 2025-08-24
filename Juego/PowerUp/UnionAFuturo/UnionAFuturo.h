@@ -4,9 +4,12 @@
 
 #ifndef PRACTICA1EDD_UNIONAFUTURO_H
 #define PRACTICA1EDD_UNIONAFUTURO_H
+#include "../PowerUp.h"
 
 
-class UnionAFuturo {
+class UnionAFuturo : public PowerUp{
+public:
+    UnionAFuturo();
 };
 
 

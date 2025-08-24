@@ -3,3 +3,11 @@
 //
 
 #include "Casilla.h"
+
+void Casilla::imprimir() {
+    if (jugador != nullptr) {
+        jugador->imprimir();
+    } else if (powerUp != nullptr) {
+
+    }
+}

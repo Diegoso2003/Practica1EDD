@@ -3,3 +3,7 @@
 //
 
 #include "AQueCosto.h"
+
+AQueCosto::AQueCosto() : PowerUp(7) {
+
+}
