@@ -35,4 +35,32 @@ add_executable(Practica1EDD main.cpp
         Juego/Punto/Punto.h
         Juego/Linea/Linea.cpp
         Juego/Linea/Linea.h
+        estructuras_de_datos/MatrizD/ListaMatriz/ListaMatriz.cpp
+        estructuras_de_datos/MatrizD/ListaMatriz/ListaMatriz.h
+        Juego/PowerUp/PowerUp.cpp
+        Juego/PowerUp/PowerUp.h
+        Juego/PowerUp/DobleLinea/DobleLinea.cpp
+        Juego/PowerUp/DobleLinea/DobleLinea.h
+        Juego/PowerUp/TrampaSecreta/TrampaSecreta.cpp
+        Juego/PowerUp/TrampaSecreta/TrampaSecreta.h
+        Juego/PowerUp/Bloqueo/Bloqueo.cpp
+        Juego/PowerUp/Bloqueo/Bloqueo.h
+        Juego/PowerUp/Pase/Pase.cpp
+        Juego/PowerUp/Pase/Pase.h
+        Juego/PowerUp/LlaveSecreta/LlaveSecreta.cpp
+        Juego/PowerUp/LlaveSecreta/LlaveSecreta.h
+        Juego/PowerUp/Escurridizo/Escurridizo.cpp
+        Juego/PowerUp/Escurridizo/Escurridizo.h
+        Juego/PowerUp/UnionAFuturo/UnionAFuturo.cpp
+        Juego/PowerUp/UnionAFuturo/UnionAFuturo.h
+        Juego/PowerUp/AQueCosto/AQueCosto.cpp
+        Juego/PowerUp/AQueCosto/AQueCosto.h
+        Juego/PowerUp/NuevasTierras/NuevasTierras.cpp
+        Juego/PowerUp/NuevasTierras/NuevasTierras.h
+        Juego/PowerUp/Explosivo/Explosivo.cpp
+        Juego/PowerUp/Explosivo/Explosivo.h
+        Juego/CreadorDePowerUps/CreadorPowerUps.cpp
+        Juego/CreadorDePowerUps/CreadorPowerUps.h
+        Juego/Casilla/Casilla.cpp
+        Juego/Casilla/Casilla.h
 )

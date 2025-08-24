@@ -16,7 +16,7 @@ bool IteradorMatriz<T>::haySiguiente(){
         if (filaActual == nullptr) {
             return false;
         }
-        actual = filaActual->getDerecha();
+        actual = filaActual->getPrimero();
         return true;
     } else {
         actual = actual->getDerecha();

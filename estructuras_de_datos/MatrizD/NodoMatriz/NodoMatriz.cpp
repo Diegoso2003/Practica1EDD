@@ -18,10 +18,6 @@ NodoMatriz<T>::NodoMatriz(T *elemento, int *fila, int *columna) {
 
 template<typename T>
 NodoMatriz<T>::~NodoMatriz() {
-   if (elemento == nullptr) {
-        delete fila;
-        delete columna;
-    }
     delete elemento;
     delete derecha;
 }

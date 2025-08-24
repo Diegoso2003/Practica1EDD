@@ -4,10 +4,11 @@
 #ifndef PRACTICA1EDD_MATRIZ_CPP
 #define PRACTICA1EDD_MATRIZ_CPP
 #include "Matriz.h"
+#include "ListaMatriz/ListaMatriz.h"
 
 template<typename T>
 Matriz<T>::Matriz() {
-    cabecera = new NodoMatriz<T>(nullptr,new int(0), new int(0));
+    cabecera = new ListaMatriz<T>(new int(0), new int(0));
     fila = 0;
     columna = 0;
     ultimaColumna = cabecera;
@@ -16,18 +17,18 @@ Matriz<T>::Matriz() {
 
 template<typename T>
 void Matriz<T>::agregarNuevaColumnaDerecha(int columna) {
-    auto *nodo = new NodoMatriz<T>(nullptr,  new int(0), new int(columna));
-    ultimaColumna->setDerecha(nodo);
-    nodo->setIzquierda(ultimaColumna);
-    ultimaColumna = nodo;
+    auto *nuevaColumna = new ListaMatriz<T>(new int(0), new int(columna));
+    ultimaColumna->setDerecha(nuevaColumna);
+    nuevaColumna->setIzquierda(ultimaColumna);
+    ultimaColumna = nuevaColumna;
 }
 
 template<typename T>
 void Matriz<T>::agregarNuevaFilaAbajo(int fila) {
-    auto *nodo = new NodoMatriz<T>(nullptr,new int(fila),new int(0));
-    ultimaFila->setAbajo(nodo);
-    nodo->setArriba(ultimaFila);
-    ultimaFila = nodo;
+    auto *nuevaFila = new ListaMatriz<T>(new int(fila),new int(0));
+    ultimaFila->setAbajo(nuevaFila);
+    nuevaFila->setArriba(ultimaFila);
+    ultimaFila = nuevaFila;
 }
 
 template<typename T>
@@ -36,38 +37,36 @@ void Matriz<T>::llenarMatriz(ListaDobleEnlazada<T> *lista) {
         std::cout << "Ingrese correctamente los datos de la matriz" << std::endl;
         return;
     }
-    NodoMatriz<T> *primeraColumna = nullptr;
-    NodoMatriz<T> *ultimoNodoAgregado = nullptr;
-    NodoMatriz<T> *nodoAuxiliar = nullptr;
+    ListaMatriz<T> *primeraColumna = nullptr;
+    ListaMatriz<T> *columnaAuxiliar = nullptr;
     for (int i = 0; i <= fila; i++) {
         if (i != 0) {
             agregarNuevaFilaAbajo(i);
-            ultimoNodoAgregado = ultimaFila;
         }
         for (int j = 1; j <= columna; j++) {
             if (i == 0) {
                 agregarNuevaColumnaDerecha(j);
                 if (j == 1) {
                     primeraColumna = ultimaColumna;
+                    columnaAuxiliar = primeraColumna;
                 }
-            } else {
-                T* elemento = lista->eliminar(1);
-                int* fila = ultimaFila->getFila();
-                int* columna = nodoAuxiliar->getColumna();
-                NodoMatriz<T> *nodoNuevo = new NodoMatriz<T>(elemento, fila, columna);
-                ultimoNodoAgregado->setDerecha(nodoNuevo);
-                nodoNuevo->setIzquierda(ultimoNodoAgregado);
-                ultimoNodoAgregado = nodoNuevo;
-                nodoAuxiliar->setAbajo(nodoNuevo);
-                nodoNuevo->setArriba(nodoAuxiliar);
-                nodoAuxiliar = nodoAuxiliar->getDerecha();
-                if (j == 1) {
-                    primeraColumna = nodoNuevo;
-                }
-                tamaño++;
+                continue;
             }
+            T* elemento = lista->eliminar(1);
+            int* fila = ultimaFila->getFila();
+            int* columna = columnaAuxiliar->getColumna();
+            NodoMatriz<T> *nuevoNodo = new NodoMatriz<T>(elemento, fila, columna);
+            ultimaFila->agregarNodoDesdeFila(j, nuevoNodo);
+            if (i == 1) {
+                columnaAuxiliar->agregarNodoDesdeColumna(i, nuevoNodo);
+            } else {
+                columnaAuxiliar->getUltimo()->setAbajo(nuevoNodo);
+                nuevoNodo->setArriba(columnaAuxiliar->getUltimo());
+                columnaAuxiliar->actualizarUltimoYPrimero();
+            }
+            columnaAuxiliar = columnaAuxiliar->getDerecha();
         }
-        nodoAuxiliar = primeraColumna;
+        columnaAuxiliar = primeraColumna;
     }
 }
 
@@ -75,7 +74,7 @@ template<typename T>
 Matriz<T>::Matriz(int filas, int columnas, ListaDobleEnlazada<T>* lista) {
     this->fila = filas;
     this->columna = columnas;
-    cabecera = new NodoMatriz<T>(nullptr,new int(0), new int(0));
+    cabecera = new ListaMatriz<T>(new int(0), new int(0));
     ultimaColumna = cabecera;
     ultimaFila = cabecera;
     llenarMatriz(lista);
@@ -83,16 +82,16 @@ Matriz<T>::Matriz(int filas, int columnas, ListaDobleEnlazada<T>* lista) {
 
 template<typename T>
 Matriz<T>::~Matriz() {
-    NodoMatriz<T> *auxiliar = cabecera;
+    ListaMatriz<T> *auxiliar = ultimaFila;
     while (auxiliar != nullptr) {
-        cabecera = cabecera->getAbajo();
-        delete auxiliar;
-        auxiliar = cabecera;
+        auxiliar = auxiliar->getArriba();
+        delete ultimaFila;
+        ultimaFila = auxiliar;
     }
 }
 
 template<typename T>
-NodoMatriz<T> *Matriz<T>::buscarColumna(int columna, bool crear) {
+ListaMatriz<T> *Matriz<T>::buscarColumna(int columna, bool crear) {
     int numero = this->columna / 2;
     bool buscarInicio = numero > columna;
     NodoMatriz<T> *auxiliar = buscarInicio ? cabecera : ultimaColumna;
@@ -135,7 +134,7 @@ NodoMatriz<T> *Matriz<T>::buscarColumna(int columna, bool crear) {
 }
 
 template<typename T>
-NodoMatriz<T> *Matriz<T>::buscarFila(int fila, bool crear) {
+ListaMatriz<T> *Matriz<T>::buscarFila(int fila, bool crear) {
     int numero = this->fila / 2;
     bool buscarInicio = numero > fila;
     NodoMatriz<T> auxiliar = buscarInicio ? cabecera : ultimaFila;
@@ -178,6 +177,17 @@ NodoMatriz<T> *Matriz<T>::buscarFila(int fila, bool crear) {
 
 template<typename T>
 void Matriz<T>::agregar(T *elemento, int fila, int columna) {
+    ListaMatriz<T> *listaFila = buscarFila(fila, true);
+    ListaMatriz<T> *listaColumna = buscarColumna(columna, true);
+    int *f = listaFila->getFila();
+    int *c = listaFila->getColumna();
+    NodoMatriz<T> *nuevoNodo = new NodoMatriz<T>(elemento, c, f);
+    if (listaColumna->agregarNodoDesdeColumna(fila, nuevoNodo)) {
+        listaFila->actualizarUltimoYPrimero();
+        listaFila->incrementarTamaño();
+    } else {
+        listaFila->agregarNodoDesdeFila(columna, nuevoNodo);
+    }
 }
 
 template<typename T>
