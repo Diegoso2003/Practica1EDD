@@ -4,20 +4,30 @@
 
 #ifndef PRACTICA1EDD_CASILLA_H
 #define PRACTICA1EDD_CASILLA_H
-#include "../Jugador/Jugador.h"
-#include "../PowerUp/PowerUp.h"
+#include <string>
 
+class Jugador;
+class Linea;
+class PowerUp;
 
 class Casilla {
 private:
+    static constexpr std::string punto = "•";
     PowerUp *powerUp;
     Jugador *jugador;
+    Linea *linea;
 public:
-    Casilla(PowerUp *powerUp): powerUp(powerUp), jugador(nullptr) {}
-    Casilla(Jugador *jugador): powerUp(nullptr), jugador(jugador) {}
+    Casilla(PowerUp *powerUp): powerUp(powerUp), jugador(nullptr), linea(nullptr) {}
+    Casilla(Jugador *jugador): powerUp(nullptr), jugador(jugador), linea(nullptr) {}
+    Casilla(Linea *linea): linea(linea), powerUp(nullptr), jugador(nullptr) {}
+    Casilla(): powerUp(nullptr), jugador(nullptr), linea(nullptr) {}
+    ~Casilla();
     PowerUp *getPowerUp() {return powerUp;}
     Jugador *getJugador() {return jugador;}
+    Linea *getLinea() {return linea;}
     void setJugador(Jugador *jugador) {this->jugador = jugador;}
+    void setLinea(Linea *linea) {this->linea = linea;}
+    void setPowerUp(PowerUp *powerUp) {this->powerUp = powerUp;}
     void imprimir();
 };
 

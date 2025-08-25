@@ -19,21 +19,28 @@ bool IteradorMatriz<T>::haySiguiente(){
         actual = filaActual->getDerecha();
         return true;
     } else {
+        anterior = actual;
         actual = actual->getDerecha();
         return actual == nullptr ? haySiguiente(): true;
     }
 }
 
 template<typename T>
-void IteradorMatriz<T>::getPosicionActual(int *posicionActual) {
-    posicionActual[0] = -1;
-    posicionActual[1] = -1;
-    if (actual != nullptr) {
-        posicionActual[0] = *actual->getFila();
-        posicionActual[1] = *actual->getColumna();
-    }
+void IteradorMatriz<T>::retroceder() {
+    actual = anterior;
 }
 
 
+template<typename T>
+int IteradorMatriz<T>::getColumnaActual() {
+    if (actual == nullptr) { return -1;}
+    return *actual->getColumna();
+}
+
+template<typename T>
+int IteradorMatriz<T>::getFilaActual() {
+    if (actual == nullptr) { return -1;}
+    return *actual->getFila();
+}
 
 #endif

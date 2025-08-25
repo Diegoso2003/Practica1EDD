@@ -5,11 +5,11 @@
 #include "TotitoChino.h"
 #include "RegistroJugadores/RegistroJugadores.h"
 
-TotitoChino::TotitoChino() : jugadores(nullptr), matrizPuntos(nullptr) {}
+TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr) {}
 
 TotitoChino::~TotitoChino() {
     delete jugadores;
-    delete matrizPuntos;
+    delete tableroJuego;
 }
 
 void TotitoChino::darDescripcion() {
@@ -29,39 +29,51 @@ void TotitoChino::darDescripcion() {
 
 void TotitoChino::imprimirTablero() {
     cout<<"Tablero:"<<endl;
-    IteradorMatriz<Punto> *puntos = matrizPuntos->getIteradorMatriz();
-    puntos->haySiguiente();
-    std::cout << "   ";
-    for (int i = 0; i <= matrizPuntos->getFila(); i++) {
-        if (i !=0) {
-            std::cout << std::to_string(i) << (i < 10 ? "  " : " ");
+    IteradorMatriz<Casilla> *casillas = tableroJuego->getIteradorMatriz();
+    for (int i = 0; i <= tableroJuego->getFila(); i++) {
+        if (i == 1) {
+            std::cout << std::to_string((i+1)/2) << ((i+1)/2 < 10 ? "  " : " ");
+        } else {
+            std::cout << "   ";
         }
-        for (int j = 1; j <= matrizPuntos->getColumna(); j++) {
-            if (i == 0) {
-                std::cout << std::to_string((j)) << (j < 10 ? "- " : "-");
-            } else {
-            Punto *puntoActual = puntos->getActual();
-            int posicionActual[2];
-            puntos->getPosicionActual(posicionActual);
-            if (posicionActual[1] != j ) {
-                std::cout << "   ";
-            } else {
-                puntoActual->imprimir();
-                if (!puntos->haySiguiente()) {
-                    break;
+        for (int j = 1; j <= tableroJuego->getColumna(); j++) {
+            if (i == 0 ) {
+                if (j % 2 != 0) {
+                    std::cout << std::to_string(((j+1)/2)) << ((j+1)/2 < 10 ? "-  " : "- ");
                 }
-            }
+            } else {
+                if (casillas->haySiguiente()) {
+                    Casilla *casillaActual = casillas->getActual();
+                    int fila = casillas->getFilaActual();
+                    int columna = casillas->getColumnaActual();
+                    while (fila != i) {
+                        std::cout<<std::endl;
+                        i++;
+                        j = 1;
+                        if (i % 2 != 0) {
+                            std::cout << std::to_string((i+1)/2) << ((i+1)/2 < 10 ? "  " : " ");
+                        }
+                    }
+                    while (columna != j) {
+                        std::cout << (j % 2 == 0 ? "   ":  " ");
+                        j++;
+                    }
+                    casillaActual->imprimir();
+                } else {
+                    std::cout << std::endl;
+                    return;
+                }
             }
         }
         std::cout << endl;
     }
-    delete puntos;
+    delete casillas;
 }
 
 void TotitoChino::iniciarJuego() {
     darDescripcion();
     auto *creadorMatriz = new CreadorDeMatriz();
-    matrizPuntos = creadorMatriz->crearMatriz();
+    tableroJuego = creadorMatriz->crearMatriz();
     auto* registro = new RegistroJugadores(creadorMatriz->getLimiteJugadores());
     jugadores = registro->registrarJugadores();
     imprimirTablero();

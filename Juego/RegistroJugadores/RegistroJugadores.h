@@ -8,7 +8,6 @@
 #include "../../estructuras_de_datos/Cola/ColaConArreglo.h"
 #include "../../estructuras_de_datos/ListaEnlazadaDoble/ListaDobleEnlazada.h"
 #include "../Jugador/Jugador.h"
-#include <random>
 
 
 class RegistroJugadores {

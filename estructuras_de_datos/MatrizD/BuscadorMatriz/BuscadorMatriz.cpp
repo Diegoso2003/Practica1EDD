@@ -5,8 +5,14 @@
 #define PRACTICA1EDD_BUSCADORMATRIZ_CPP
 #include "BuscadorMatriz.h"
 #include "../Matriz.h"
+
 template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
+    if (columna > this->matriz->getColumna()) {
+        this->matriz->getAgregador()->agregarNuevaColumnaDerecha(columna);
+        columna++;
+        return this->matriz->getUltimaColumna();
+    }
     int numero = this->matriz->getColumna() / 2;
     bool buscarInicio = numero > columna;
     NodoMatriz<T> *auxiliar = buscarInicio ? this->matriz->getCabecera() : this->matriz->getUltimaColumna();
@@ -18,27 +24,21 @@ NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
         if (buscarInicio && columnaActual > columna) {
             if (crear) {
                 NodoMatriz<T> *nodoNuevo = new NodoMatriz<T>(nullptr, new int(0), new int(columna));
-                NodoMatriz<T> auxiliar2 = auxiliar->getIzquierda();
-                auxiliar2->setDerecha(nodoNuevo);
-                nodoNuevo->setIzquierda(auxiliar2);
-                auxiliar->setIzquierda(nodoNuevo);
+                auxiliar->getIzquierda()->setDerecha(nodoNuevo);
+                nodoNuevo->setIzquierda(auxiliar->getIzquierda());
                 nodoNuevo->setDerecha(auxiliar);
+                auxiliar->setIzquierda(nodoNuevo);
+                return nodoNuevo;
             }
             return nullptr;
         }
         if (!buscarInicio && columnaActual < columna) {
             if (crear) {
-                if (columna > this->matriz->columna()) {
-                    this->matriz->getAgregador()->agregarNuevaColumnaDerecha(columna);
-                    columna++;
-                    return this->matriz->getUltimaColumna();
-                }
                 NodoMatriz<T> *nuevoNodo = new NodoMatriz<T>(nullptr, new int(0), new int(columna));
-                NodoMatriz<T> *auxiliar2 = auxiliar->getDerecha();
-                auxiliar->setDerecha(nuevoNodo);
+                auxiliar->getDerecha()->setIzquierda(nuevoNodo);
+                nuevoNodo->setDerecha(auxiliar->getDerecha());
                 nuevoNodo->setIzquierda(auxiliar);
-                auxiliar2->setIzquierda(nuevoNodo);
-                nuevoNodo->setDerecha(auxiliar2);
+                auxiliar->setDerecha(nuevoNodo);
                 return nuevoNodo;
             }
             return nullptr;
@@ -50,9 +50,14 @@ NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
 
 template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarFila(int fila, bool crear) {
+    if (fila > this->matriz->getFila()) {
+        matriz->getAgregador()->agregarNuevaFilaAbajo(fila);
+        fila++;
+        return this->matriz->getUltimaFila();
+    }
     int numero = this->matriz->getFila() / 2;
     bool buscarInicio = numero > fila;
-    NodoMatriz<T> auxiliar = buscarInicio ? this->matriz->getCabecera() : this->matriz->getUltimaFila();
+    NodoMatriz<T> *auxiliar = buscarInicio ? this->matriz->getCabecera() : this->matriz->getUltimaFila();
     while (auxiliar != nullptr) {
         int filaActual = *auxiliar->getFila();
         if (filaActual == fila) {
@@ -61,27 +66,22 @@ NodoMatriz<T> *BuscadorMatriz<T>::buscarFila(int fila, bool crear) {
         if (buscarInicio && filaActual > fila) {
             if (crear) {
                 NodoMatriz<T> *nodoNuevo = new NodoMatriz<T>(nullptr, new int(fila), new int(0));
-                NodoMatriz<T> *auxiliar2 = auxiliar->getArriba();
-                nodoNuevo->setArriba(auxiliar2);
-                auxiliar2->setAbajo(nodoNuevo);
-                auxiliar->setArriba(nodoNuevo);
+                auxiliar->getArriba()->setAbajo(nodoNuevo);
+                nodoNuevo->setArriba(auxiliar->getArriba());
                 nodoNuevo->setAbajo(auxiliar);
+                auxiliar->setArriba(nodoNuevo);
+                return nodoNuevo;
             }
             return nullptr;
         }
         if (!buscarInicio && filaActual < fila) {
             if (crear) {
-                if (fila > this->matriz->fila) {
-                    matriz->getAgregador()->agregarNuevaFilaAbajo(fila);
-                    fila++;
-                    return this->matriz->getUltimaFila();
-                }
                 NodoMatriz<T> *nodoNuevo = new NodoMatriz<T>(nullptr, new int(fila), new int(0));
-                NodoMatriz<T> *auxiliar2 = auxiliar->getArriba();
-                nodoNuevo->setAbajo(auxiliar2);
-                auxiliar2->setArriba(nodoNuevo);
-                auxiliar->setAbajo(nodoNuevo);
+                auxiliar->getAbajo()->setArriba(nodoNuevo);
+                nodoNuevo->setAbajo(auxiliar->getAbajo());
                 nodoNuevo->setArriba(auxiliar);
+                auxiliar->setAbajo(nodoNuevo);
+                return nodoNuevo;
             }
             return nullptr;
         }

@@ -6,22 +6,17 @@
 #define PRACTICA1EDD_LINEA_H
 #include <string>
 #include <iostream>
-#include "../Jugador/Jugador.h"
-class Punto;
-
+class Jugador;
+class PowerUp;
 class Linea {
 private:
     static constexpr std::string lineaVertical = "│";
-    static constexpr std::string lineaHorizontal = "──";
+    static constexpr std::string lineaHorizontal = "───";
     const std::string *linea;
-    Punto *punto1;
-    Punto *punto2;
     Jugador *dueño;
-    //poder linea
+    PowerUp *powerUp;
 public:
-    Linea(bool vertical,Punto *punto1,Punto *punto2, Jugador *dueño);
-    Punto *getPunto1(){return punto1;}
-    Punto *getPunto2(){return punto2;}
+    Linea(bool vertical,Jugador *dueño);
     void imprimir();
 };
 

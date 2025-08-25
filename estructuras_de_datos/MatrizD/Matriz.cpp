@@ -24,6 +24,8 @@ void Matriz<T>::llenarMatriz(ListaDobleEnlazada<T> *lista) {
         std::cout << "Ingrese correctamente los datos de la matriz" << std::endl;
         return;
     }
+    fila = fila * 2 - 1;
+    columna = columna * 2 - 1;
     NodoMatriz<T> *primeraColumna = nullptr;
     NodoMatriz<T> *ultimoNodoAgregado = nullptr;
     NodoMatriz<T> *nodoAuxiliar = nullptr;
@@ -31,8 +33,9 @@ void Matriz<T>::llenarMatriz(ListaDobleEnlazada<T> *lista) {
         if (i != 0) {
             agregador->agregarNuevaFilaAbajo(i);
             ultimoNodoAgregado = ultimaFila;
+            i++;
         }
-        for (int j = 1; j <= columna; j++) {
+        for (int j = 1; j <= columna; j+=2) {
             if (i == 0) {
                 agregador->agregarNuevaColumnaDerecha(j);
                 if (j == 1) {
@@ -97,7 +100,12 @@ void Matriz<T>::agregar(T *elemento, int fila, int columna) {
 
 template<typename T>
 T *Matriz<T>::getElemento(int fila, int columna) {
-    return nullptr;
+    NodoMatriz<T> *nodoColumna = buscador->buscarColumna(columna, false);
+    if (nodoColumna == nullptr) {return nullptr;}
+    while (nodoColumna->getAbajo() != nullptr && *nodoColumna->getFila() < fila) {
+        nodoColumna = nodoColumna->getAbajo();
+    }
+    return *nodoColumna->getFila() == fila ? nodoColumna->getElemento() : nullptr;
 }
 
 #endif

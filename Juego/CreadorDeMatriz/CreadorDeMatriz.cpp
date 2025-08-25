@@ -4,6 +4,8 @@
 
 #include "CreadorDeMatriz.h"
 
+#include "../CreadorDePowerUps/CreadorPowerUps.h"
+
 int CreadorDeMatriz::pedirNumero(std::string &mensaje) {
     bool hayError = false;
     int numero = 0;
@@ -32,10 +34,10 @@ bool CreadorDeMatriz::esNumeroFilasInvalido(int &numero) const {
     return numero > maximoFilas || numero < minimoFilas;
 }
 
-ListaDobleEnlazada<Punto> *CreadorDeMatriz::crearPuntos(int &puntosTotales) {
-    auto *listaDoble = new ListaDobleEnlazada<Punto>();
+ListaDobleEnlazada<Casilla> *CreadorDeMatriz::crearPuntos(int &puntosTotales) {
+    auto *listaDoble = new ListaDobleEnlazada<Casilla>();
     for (int i = 0; i < puntosTotales; i++) {
-        listaDoble->agregar(new Punto);
+        listaDoble->agregar(new Casilla());
     }
     return listaDoble;
 }
@@ -55,7 +57,7 @@ void CreadorDeMatriz::calcularMaximoJugadores(int &puntosTotales) {
 }
 
 
-Matriz<Punto> *CreadorDeMatriz::crearMatriz() {
+Matriz<Casilla> *CreadorDeMatriz::crearMatriz() {
     bool hayError = false;
     int filas;
     int columnas;
@@ -79,8 +81,11 @@ Matriz<Punto> *CreadorDeMatriz::crearMatriz() {
     }while (hayError);
     int totalPuntos = filas * columnas;
     auto *listaDoble = crearPuntos(totalPuntos);
-    auto *matriz = new Matriz<Punto>(filas, columnas, listaDoble);
+    auto *matriz = new Matriz<Casilla>(filas, columnas, listaDoble);
     delete listaDoble;
     calcularMaximoJugadores(totalPuntos);
+    CreadorPowerUps *creadorDePowerUp = new CreadorPowerUps();
+    creadorDePowerUp->llenarTableroDePowerUps(matriz);
+    delete creadorDePowerUp;
     return matriz;
 }

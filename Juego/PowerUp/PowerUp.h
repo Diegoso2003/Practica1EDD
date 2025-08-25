@@ -17,7 +17,6 @@ public:
     PowerUp(int posicion);
     virtual ~PowerUp(){}
     void imprimir();
-    virtual void activar(TotitoChino *juego) const = 0;
 };
 
 

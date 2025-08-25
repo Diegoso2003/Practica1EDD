@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include "../../estructuras_de_datos/MatrizD/Matriz.h"
-#include "../Punto/Punto.h"
+#include "../Casilla/Casilla.h"
 
 
 class CreadorDeMatriz {
@@ -21,10 +21,10 @@ private:
     int pedirNumero(std::string &mensaje);
     bool esNumeroColumnasInvalido(int &numero) const;
     bool esNumeroFilasInvalido(int &numero) const;
-    ListaDobleEnlazada<Punto> *crearPuntos(int &puntosTotales);
+    ListaDobleEnlazada<Casilla> *crearPuntos(int &puntosTotales);
     void calcularMaximoJugadores(int &puntosTotales);
 public:
-    Matriz<Punto> *crearMatriz();
+    Matriz<Casilla> *crearMatriz();
     int getLimiteJugadores(){return limiteJugadores;};
 };
 

@@ -3,12 +3,12 @@
 //
 
 #include "Linea.h"
-#include "../Punto/Punto.h"
 
-Linea::Linea(bool vertical, Punto *punto1, Punto *punto2, Jugador *dueño) {
+#include "../Color.h"
+#include "../Jugador/Jugador.h"
+
+Linea::Linea(bool vertical, Jugador *dueño) {
     linea = vertical ? &lineaVertical : &lineaHorizontal;
-    this->punto1 = punto1;
-    this->punto2 = punto2;
     this->dueño = dueño;
 }
 

@@ -3,6 +3,7 @@
 //
 
 #include "RegistroJugadores.h"
+#include <random>
 
 RegistroJugadores::RegistroJugadores(int limiteJugadores) {
     this->maximoJugadores = limiteJugadores;
@@ -69,6 +70,7 @@ Jugador *RegistroJugadores::pedirDatosJugador() {
         Color::Tipo* colorJugador = obtenerColorAleatorio();
         return new Jugador(nombreJugador, caracterJugador[0], colorJugador);
     }while (hayError);
+    return nullptr;
 }
 
 

@@ -6,13 +6,13 @@
 #define PRACTICA1EDD_TOTITO_CHINO_H
 
 #include "../estructuras_de_datos/Cola/ColaConArreglo.h"
-#include "Jugador/Jugador.h"
 #include "CreadorDeMatriz/CreadorDeMatriz.h"
-#include "Punto/Punto.h"
 
+class Casilla;
+class Jugador;
 class TotitoChino {
 private:
-    Matriz<Punto> *matrizPuntos;
+    Matriz<Casilla> *tableroJuego;
     ColaConArreglo<Jugador> *jugadores;
     void darDescripcion();
     void imprimirTablero();

@@ -12,6 +12,8 @@ class AgregadorMatriz {
 private:
     Matriz<T> *matriz;
     bool intentarAgregarDesdeColumna(int fila, NodoMatriz<T> *nodo);
+    bool intentarConectarDerecha(int fila, NodoMatriz<T> *nodo, NodoMatriz<T> *nodoActual, bool arriba);
+    bool intentarConectarIzquierda(int fila, NodoMatriz<T> *nodo, NodoMatriz<T> *nodoActual, bool arriba);
 public:
     AgregadorMatriz(Matriz<T> *matriz): matriz(matriz) {}
     void agregarNuevaFilaAbajo(int fila);

@@ -29,6 +29,7 @@ NodoMatriz<T>::NodoMatriz(T *elemento) {
 
 template<typename T>
 NodoMatriz<T>::~NodoMatriz() {
+    //std::cout << "Destruindo NodoMatriz: fila: " << *fila << " columna: "<< *columna << std::endl;
     delete elemento;
     delete derecha;
     if (elemento == nullptr) {

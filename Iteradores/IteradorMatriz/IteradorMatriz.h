@@ -11,11 +11,14 @@ class IteradorMatriz {
 private:
     NodoMatriz<T> *filaActual;
     NodoMatriz<T> *actual;
+    NodoMatriz<T> *anterior;
 public:
     IteradorMatriz(NodoMatriz<T> *cabecera):filaActual(cabecera), actual(nullptr) {}
     bool haySiguiente();
     T *getActual(){return actual->getElemento();}
-    void getPosicionActual(int *posicionActual);
+    int getColumnaActual();
+    int getFilaActual();
+    void retroceder();
 };
 
 #include "IteradorMatriz.cpp"

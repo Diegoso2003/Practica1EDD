@@ -4,8 +4,8 @@
 
 #ifndef PRACTICA1EDD_BUSCADORMATRIZ_H
 #define PRACTICA1EDD_BUSCADORMATRIZ_H
-template <typename T> class Matriz;
 #include "../NodoMatriz/NodoMatriz.h"
+template <typename T> class Matriz;
 
 template <typename T>
 class BuscadorMatriz {
@@ -17,5 +17,5 @@ public:
     NodoMatriz<T> *buscarFila(int fila, bool crear);
 };
 
-
+#include "BuscadorMatriz.cpp"
 #endif //PRACTICA1EDD_BUSCADORMATRIZ_H

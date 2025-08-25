@@ -29,5 +29,5 @@ std::string Jugador::getNombre() const {
 }
 
 void Jugador::imprimir() {
-    std::cout << Color::codigo(*this->color) << this->inicial << " " << Color::codigo(Color::Tipo::RESET);
+    std::cout << Color::codigo(*this->color) << " "<< this->inicial << " " << Color::codigo(Color::Tipo::RESET);
 }
