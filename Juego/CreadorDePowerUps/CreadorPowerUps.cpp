@@ -61,6 +61,7 @@ void CreadorPowerUps::llenarTableroDePowerUps(Matriz<Casilla> *tablero) {
     int filas = (tablero->getFila() + 1) / 2;
     int columnas = (tablero->getColumna() + 1) / 2;
     int limite = calcularLimitePowerUps(filas, columnas);
+    std::cout << "Limite: " << limite << std::endl;
     for (int i = limite; i > 0; i--) {
         int fila = 0;
         int columna = 0;

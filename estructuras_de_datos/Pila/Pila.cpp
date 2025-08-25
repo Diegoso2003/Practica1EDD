@@ -17,9 +17,7 @@ Pila<T>::~Pila() {
     do {
         aux = primeroEnSalir->getSiguiente();
         T* elemento = primeroEnSalir->getElemento();
-        if (elemento != nullptr) {
-            delete elemento;
-        }
+        delete elemento;
         delete primeroEnSalir;
         primeroEnSalir = aux;
     }while (primeroEnSalir != nullptr);

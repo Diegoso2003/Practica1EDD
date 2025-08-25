@@ -4,13 +4,12 @@
 #ifndef PRACTICA1EDD_BUSCADORMATRIZ_CPP
 #define PRACTICA1EDD_BUSCADORMATRIZ_CPP
 #include "BuscadorMatriz.h"
-#include "../Matriz.h"
 
 template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
     if (columna > this->matriz->getColumna()) {
         this->matriz->getAgregador()->agregarNuevaColumnaDerecha(columna);
-        columna++;
+        this->matriz->setColumna(columna);
         return this->matriz->getUltimaColumna();
     }
     int numero = this->matriz->getColumna() / 2;
@@ -52,7 +51,7 @@ template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarFila(int fila, bool crear) {
     if (fila > this->matriz->getFila()) {
         matriz->getAgregador()->agregarNuevaFilaAbajo(fila);
-        fila++;
+        this->matriz->setFila(fila);
         return this->matriz->getUltimaFila();
     }
     int numero = this->matriz->getFila() / 2;
@@ -87,6 +86,7 @@ NodoMatriz<T> *BuscadorMatriz<T>::buscarFila(int fila, bool crear) {
         }
         auxiliar = buscarInicio ? auxiliar->getAbajo() : auxiliar->getArriba();
     }
+    return nullptr;
 }
 
 #endif

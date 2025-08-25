@@ -5,21 +5,25 @@
 #ifndef PRACTICA1EDD_TOTITO_CHINO_H
 #define PRACTICA1EDD_TOTITO_CHINO_H
 
-#include "../estructuras_de_datos/Cola/ColaConArreglo.h"
 #include "CreadorDeMatriz/CreadorDeMatriz.h"
+#include "ProcesadorOpciones/ProcesadorOpciones.h"
 
 class Casilla;
 class Jugador;
 class TotitoChino {
 private:
     Matriz<Casilla> *tableroJuego;
-    ColaConArreglo<Jugador> *jugadores;
+    ListaDobleEnlazada<Jugador> *jugadores;
+    ProcesadorOpciones *procesadorOpciones;
     void darDescripcion();
     void imprimirTablero();
+    void imprimirInformacionJugadores();
 public:
     TotitoChino();
     ~TotitoChino();
     void iniciarJuego();
+    Matriz<Casilla> *getTableroJuego(){return tableroJuego;}
+    ListaDobleEnlazada<Jugador> *getJugadores(){return jugadores;}
 };
 
 

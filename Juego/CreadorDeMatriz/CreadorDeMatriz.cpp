@@ -18,7 +18,9 @@ int CreadorDeMatriz::pedirNumero(std::string &mensaje) {
         std::cout << mensaje << std::endl;
         std::getline(std::cin, entrada);
         try {
-            numero = std::stoi(entrada);
+            size_t pos;
+            numero = std::stoi(entrada, &pos);
+            hayError = pos != entrada.size();
         } catch (const std::exception& e) {
             hayError = true;
         }
@@ -76,8 +78,7 @@ Matriz<Casilla> *CreadorDeMatriz::crearMatriz() {
         .append(", max: ")
         .append(std::to_string(maximoColumnas));
         columnas = pedirNumero(mensaje);
-        hayError = esNumeroColumnasInvalido(columnas);
-        hayError = esNumeroFilasInvalido(filas);
+        hayError = esNumeroColumnasInvalido(columnas) || esNumeroFilasInvalido(filas);
     }while (hayError);
     int totalPuntos = filas * columnas;
     auto *listaDoble = crearPuntos(totalPuntos);

@@ -120,9 +120,6 @@ bool AgregadorMatriz<T>::intentarAgregarDesdeColumna(int fila, NodoMatriz<T> *no
         agregado = intentarConectarDerecha(fila, nodo, aux->getAbajo(), true) ||
             intentarConectarIzquierda(fila, nodo, aux->getAbajo(), true);
     }
-    if (agregado) {
-        std::cout << "agregado desde columna, fila: " << *nodo->getFila() << " columna: " << *nodo->getColumna() << std::endl;
-    }
     return agregado;
 }
 

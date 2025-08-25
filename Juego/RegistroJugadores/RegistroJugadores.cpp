@@ -4,6 +4,7 @@
 
 #include "RegistroJugadores.h"
 #include <random>
+#include <iostream>
 
 RegistroJugadores::RegistroJugadores(int limiteJugadores) {
     this->maximoJugadores = limiteJugadores;
@@ -24,9 +25,10 @@ Color::Tipo *RegistroJugadores::obtenerColorAleatorio(){
 }
 
 bool RegistroJugadores::caracterEstaApartado(char c) {
-    Jugador** jugadores2 = jugadores->getElementos();
-    for (int i = 0; i < jugadores->getTamaño(); i++) {
-        if (jugadores2[i]->getInicial() == c) {
+    IteradorLED<Jugador> *lista = jugadores->getIterador();
+    while (lista->haySiguiente()) {
+        Jugador *jugador = lista->getActual();
+        if (jugador->getInicial() == c) {
             return true;
         }
     }
@@ -48,36 +50,35 @@ Jugador *RegistroJugadores::pedirDatosJugador() {
     bool hayError = false;
     do {
         if (hayError) {
-            cout<< "Ingrese correctamente los datos solicitados" << endl;
+            std::cout<< "Ingrese correctamente los datos solicitados" << std::endl;
         }
-        cout<< "Ingrese nombre del jugador " << (jugadores->getTamaño()+1) << ":" <<endl ;
-        cin >> nombreJugador;
+        std::cout<< "Ingrese nombre del jugador " << (jugadores->getTamaño()+1) << ":" << std::endl ;
+        std::cin >> nombreJugador;
         if (nombreJugador.empty()) {
             hayError = true;
             continue;
         }
-        cout << "Ingrese la inicial para el jugador " << (jugadores->getTamaño()+1) << ":" <<endl;
-        cin >> caracterJugador;
+        std::cout << "Ingrese la inicial para el jugador " << (jugadores->getTamaño()+1) << ":" <<std::endl;
+        std::cin >> caracterJugador;
         if (caracterJugador.empty() || caracterJugador.size() > 1) {
             hayError = true;
             continue;
         }
         if (caracterEstaApartado(caracterJugador[0])) {
             hayError = true;
-            cout << "¡Ya hay un jugador con esta letra!" << endl;
+            std::cout << "¡Ya hay un jugador con esta letra!" << std::endl;
             continue;
         }
         Color::Tipo* colorJugador = obtenerColorAleatorio();
         return new Jugador(nombreJugador, caracterJugador[0], colorJugador);
     }while (hayError);
-    return nullptr;
 }
 
 
-ColaConArreglo<Jugador> *RegistroJugadores::registrarJugadores() {
+ListaDobleEnlazada<Jugador> *RegistroJugadores::registrarJugadores() {
     pedirNumeroJugadores();
-    for (int i = 0; i < jugadores->getCapacidad(); i++) {
-        jugadores->agregarALaCola(pedirDatosJugador());
+    for (int i = 0; i < tamaño; i++) {
+        jugadores->agregar(pedirDatosJugador());
     }
     return jugadores;
 }
@@ -94,11 +95,13 @@ void RegistroJugadores::pedirNumeroJugadores() {
         std::getline(std::cin, entrada);
 
         try {
-            numero = std::stoi(entrada);
-            hayError = numero < minimoJugadores || numero > maximoJugadores;
+            size_t pos;
+            numero = std::stoi(entrada, &pos);
+            hayError = numero < minimoJugadores || numero > maximoJugadores || pos != entrada.size();
         } catch (const std::exception& e) {
             hayError = true;
         }
     } while (hayError);
-    jugadores = new ColaConArreglo<Jugador>(numero);
+    jugadores = new ListaDobleEnlazada<Jugador>();
+    tamaño = numero;
 }

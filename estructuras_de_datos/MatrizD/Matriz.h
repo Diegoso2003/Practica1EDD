@@ -5,7 +5,7 @@
 #ifndef PRACTICA1EDD_MATRIZ_H
 #define PRACTICA1EDD_MATRIZ_H
 #include "../../Iteradores/IteradorMatriz/IteradorMatriz.h"
-#include "../ListaEnlazadaDoble/ListaDobleEnlazada.h"
+#include "../ListaEnlazadaDoble/NodoDoble/ListaDobleEnlazada.h"
 #include "AgregarMatriz/AgregadorMatriz.h"
 #include "BuscadorMatriz/BuscadorMatriz.h"
 
@@ -38,6 +38,8 @@ public:
     void setUltimaColumna(NodoMatriz<T> *ultima_columna) {ultimaColumna = ultima_columna;}
     BuscadorMatriz<T> * getBuscador() const {return buscador;}
     AgregadorMatriz<T> * getAgregador() const {return agregador;}
+    void setFila(int fila){this->fila = fila;}
+    void setColumna(int columna){this->columna = columna;}
 };
 
 #include "Matriz.cpp"

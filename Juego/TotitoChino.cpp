@@ -4,31 +4,56 @@
 
 #include "TotitoChino.h"
 #include "RegistroJugadores/RegistroJugadores.h"
+#include <iostream>
 
-TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr) {}
+TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr) {
+    procesadorOpciones = new ProcesadorOpciones(this);
+}
 
 TotitoChino::~TotitoChino() {
     delete jugadores;
     delete tableroJuego;
+    delete procesadorOpciones;
 }
 
+void TotitoChino::imprimirInformacionJugadores() {
+    std::cout << "Orden en el que se establecieron los turnos: " << std::endl;
+    IteradorLED<Jugador> *lista = jugadores->getIterador();
+    while (lista->haySiguiente()) {
+        lista->getActual()->imprimirJugador();
+    }
+    std::cout << "Presiona enter para empezar "<<std::endl;
+    std::cin.ignore();
+    std::cin.get();
+}
+
+
 void TotitoChino::darDescripcion() {
-    cout<<"TOTITO CHINO: "<<endl;
-    cout<<"OBJETIVO:"<<endl;
-    cout<<"\tFormar el mayor número de cuadrados conectando puntos adyacentes." << endl;
-    cout<<"\tCada cuadrado completo otorga 1 punto y en caso de tener, un poder especial."<<endl;
-    cout<<"CÓMO JUGAR:"<<endl;
-    cout<<"\tTablero: arreglo de puntos"<<endl;
-    cout<<"\tTurnos: Los jugadores alternan turnos"<<endl;
-    cout<<"\tMovimiento: Conectar dos puntos adyacentes con línea horizontal o vertical"<<endl;
-    cout<<"Cuadrado completo: Al completar un cuadrado, el jugador gana:"<<endl;
-    cout<<"\t1 punto"<<endl;
-    cout<<"\tUn poder(en caso de que la casilla encerrada tenga una)"<<endl;
-    cout<<"\tTurno extra"<<endl<<endl;
+    std::cout<<"TOTITO CHINO: "<<std::endl;
+    std::cout<<"OBJETIVO:"<<std::endl;
+    std::cout<<"\tFormar el mayor número de cuadrados conectando puntos adyacentes." << std::endl;
+    std::cout<<"\tCada cuadrado completo otorga 1 punto y en caso de tener, un poder especial."<<std::endl;
+    std::cout<<"CÓMO JUGAR:"<<std::endl;
+    std::cout<<"\tTablero: arreglo de puntos"<<std::endl;
+    std::cout<<"\tTurnos: Los jugadores alternan turnos"<<std::endl;
+    std::cout<<"\tMovimiento: Conectar dos puntos adyacentes con línea horizontal o vertical"<<std::endl;
+    std::cout<<"Cuadrado completo: Al completar un cuadrado, el jugador gana:"<<std::endl;
+    std::cout<<"\t1 punto"<<std::endl;
+    std::cout<<"\tUn poder(en caso de que la casilla encerrada tenga una)"<<std::endl;
+    std::cout<<"\tTurno extra"<<std::endl<<std::endl;
+    std::cout << "Para conectar dos puntos vecinos:" << std::endl;
+    std::cout << "Usa: fila1,col1 -> fila2,col2" << std::endl << std::endl;
+    std::cout << "Ejemplos:" << std::endl;
+    std::cout << "- 5,10 -> 5,11 (horizontal)" << std::endl;
+    std::cout << "- 3,8 -> 4,8 (vertical)" << std::endl << std::endl;
+    std::cout << "Reglas:" << std::endl;
+    std::cout << "- Puntos deben estar juntos (horizontal o vertical)." << std::endl;
+    std::cout << "- No debe existir una linea ya entre ellos." << std::endl;
+    std::cout << "- Coordenadas entre las dimensiones del tablero." << std::endl<< std::endl;
 }
 
 void TotitoChino::imprimirTablero() {
-    cout<<"Tablero:"<<endl;
+    std::cout<<"Tablero:"<<std::endl;
     IteradorMatriz<Casilla> *casillas = tableroJuego->getIteradorMatriz();
     for (int i = 0; i <= tableroJuego->getFila(); i++) {
         if (i == 1) {
@@ -39,7 +64,7 @@ void TotitoChino::imprimirTablero() {
         for (int j = 1; j <= tableroJuego->getColumna(); j++) {
             if (i == 0 ) {
                 if (j % 2 != 0) {
-                    std::cout << std::to_string(((j+1)/2)) << ((j+1)/2 < 10 ? "-  " : "- ");
+                    std::cout << std::to_string(((j+1)/2)) << ((j+1)/2 < 10 ? "   " : "  ");
                 }
             } else {
                 if (casillas->haySiguiente()) {
@@ -65,7 +90,7 @@ void TotitoChino::imprimirTablero() {
                 }
             }
         }
-        std::cout << endl;
+        std::cout << std::endl;
     }
     delete casillas;
 }
@@ -76,7 +101,12 @@ void TotitoChino::iniciarJuego() {
     tableroJuego = creadorMatriz->crearMatriz();
     auto* registro = new RegistroJugadores(creadorMatriz->getLimiteJugadores());
     jugadores = registro->registrarJugadores();
+    imprimirInformacionJugadores();
     imprimirTablero();
+    do {
+        procesadorOpciones->mostrarOpciones();
+        imprimirTablero();
+    }while (procesadorOpciones->getSeguirJugando());
     delete registro;
     delete creadorMatriz;
 }

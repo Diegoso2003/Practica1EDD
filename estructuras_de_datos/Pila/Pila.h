@@ -4,7 +4,7 @@
 
 #ifndef PRACTICA1EDD_PILA_H
 #define PRACTICA1EDD_PILA_H
-#include "NodoSimple.h"
+#include "NodoSimple/NodoSimple.h"
 
 template<typename T>
 class Pila {

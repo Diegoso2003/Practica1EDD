@@ -5,8 +5,7 @@
 #ifndef PRACTICA1EDD_REGISTROJUGADORES_H
 #define PRACTICA1EDD_REGISTROJUGADORES_H
 #include "../Color.h"
-#include "../../estructuras_de_datos/Cola/ColaConArreglo.h"
-#include "../../estructuras_de_datos/ListaEnlazadaDoble/ListaDobleEnlazada.h"
+#include "../../estructuras_de_datos/ListaEnlazadaDoble/NodoDoble/ListaDobleEnlazada.h"
 #include "../Jugador/Jugador.h"
 
 
@@ -14,8 +13,9 @@ class RegistroJugadores {
 private:
     const int minimoJugadores = 2;
     int maximoJugadores;
+    int tamaño;
     ListaDobleEnlazada<Color::Tipo>* coloresDisponibles;
-    ColaConArreglo<Jugador> *jugadores = nullptr;
+    ListaDobleEnlazada<Jugador> *jugadores = nullptr;
     void pedirNumeroJugadores();
     void inicializarColoresDisponibles();
     Jugador* pedirDatosJugador();
@@ -24,7 +24,7 @@ private:
 public:
     RegistroJugadores(int limiteJugadores);
     ~RegistroJugadores();
-    ColaConArreglo<Jugador> *registrarJugadores();
+    ListaDobleEnlazada<Jugador> *registrarJugadores();
 };
 
 

@@ -12,7 +12,7 @@ private:
     NodoDoble<T> *actual;
 public:
     IteradorLED(NodoDoble<T> *actual);
-    bool hayaSiguiente(){return actual != nullptr;}
+    bool haySiguiente(){return actual != nullptr;}
     T *getActual();
 };
 

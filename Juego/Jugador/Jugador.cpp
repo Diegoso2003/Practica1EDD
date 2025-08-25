@@ -10,10 +10,12 @@ Jugador::Jugador(std::string nombre, char inicial, Color::Tipo *color) {
     this->nombre = nombre;
     this->inicial = inicial;
     this->color = color;
+    this->poderes = new Pila<PowerUp>();
 }
 
 Jugador::~Jugador() {
     delete color;
+    delete poderes;
 }
 
 Color::Tipo *Jugador::getColor() const {
@@ -30,4 +32,9 @@ std::string Jugador::getNombre() const {
 
 void Jugador::imprimir() {
     std::cout << Color::codigo(*this->color) << " "<< this->inicial << " " << Color::codigo(Color::Tipo::RESET);
+}
+
+void Jugador::imprimirJugador() {
+    std::cout << Color::codigo(*this->color) << nombre << ", inicial: " << inicial << ", punteo: "
+    <<puntos<< Color::codigo(Color::Tipo::RESET)<<std::endl;
 }

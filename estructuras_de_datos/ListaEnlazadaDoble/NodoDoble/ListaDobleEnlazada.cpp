@@ -120,4 +120,15 @@ IteradorLED<T> *ListaDobleEnlazada<T>::getIterador() {
     return new IteradorLED<T>(primero);
 }
 
+template<typename T>
+void ListaDobleEnlazada<T>::agregarPrimero(T *elemento) {
+    NodoDoble<T> *nodo = new NodoDoble<T>(elemento);
+    if (!estaVacia()) {
+        primero -> setAnterior(nodo);
+        nodo->setSiguiente(primero);
+    }
+    primero = nodo;
+}
+
+
 #endif

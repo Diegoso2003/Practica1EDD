@@ -7,13 +7,17 @@
 #include <string>
 
 #include "../Color.h"
+#include "../../estructuras_de_datos/Pila/Pila.h"
 
+class PowerUp;
 
 class Jugador {
 private:
     std::string nombre;
+    int puntos = 0;
     char inicial;
     Color::Tipo* color;
+    Pila<PowerUp> *poderes;
 public:
     Jugador(std::string nombre, char inicial, Color::Tipo *color);
     ~Jugador();
@@ -21,6 +25,7 @@ public:
     Color::Tipo *getColor() const;
     char getInicial() const;
     void imprimir();
+    void imprimirJugador();
 };
 
 
