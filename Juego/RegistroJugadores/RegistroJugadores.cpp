@@ -72,6 +72,7 @@ Jugador *RegistroJugadores::pedirDatosJugador() {
         Color::Tipo* colorJugador = obtenerColorAleatorio();
         return new Jugador(nombreJugador, caracterJugador[0], colorJugador);
     }while (hayError);
+    return nullptr;
 }
 
 

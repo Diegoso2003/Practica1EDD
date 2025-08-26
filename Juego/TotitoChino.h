@@ -15,15 +15,21 @@ private:
     Matriz<Casilla> *tableroJuego;
     ListaDobleEnlazada<Jugador> *jugadores;
     ProcesadorOpciones *procesadorOpciones;
+    Jugador *jugadorPunto;
+    Jugador *jugadorCasilla;
+    bool darTurnoExtra = false;
     void darDescripcion();
     void imprimirTablero();
     void imprimirInformacionJugadores();
 public:
     TotitoChino();
     ~TotitoChino();
-    void iniciarJuego();
-    Matriz<Casilla> *getTableroJuego(){return tableroJuego;}
     ListaDobleEnlazada<Jugador> *getJugadores(){return jugadores;}
+    Matriz<Casilla> *getTableroJuego(){return tableroJuego;}
+    void iniciarJuego();
+    void conectarLinea(int fila1, int columna1, int fila2, int columna2);
+    void cambiarTurno();
+    void setDarTurnoExtra(bool darTurnoExtra){this->darTurnoExtra =darTurnoExtra;}
 };
 
 

@@ -69,4 +69,6 @@ add_executable(Practica1EDD main.cpp
         Juego/ProcesadorOpciones/ProcesadorOpciones.h
         Juego/ExtractorCoordenadas/ExtractorCoordenadas.cpp
         Juego/ExtractorCoordenadas/ExtractorCoordenadas.h
+        estructuras_de_datos/ColaEnlazada/ColaEnlazada.cpp
+        estructuras_de_datos/ColaEnlazada/ColaEnlazada.h
 )

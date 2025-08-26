@@ -4,9 +4,12 @@
 
 #include "TotitoChino.h"
 #include "RegistroJugadores/RegistroJugadores.h"
+#include "Linea/Linea.h"
+#include <cmath>
+#include <cstdlib>
 #include <iostream>
 
-TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr) {
+TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr), jugadorPunto(nullptr), jugadorCasilla(nullptr) {
     procesadorOpciones = new ProcesadorOpciones(this);
 }
 
@@ -25,6 +28,8 @@ void TotitoChino::imprimirInformacionJugadores() {
     std::cout << "Presiona enter para empezar "<<std::endl;
     std::cin.ignore();
     std::cin.get();
+    jugadorCasilla = jugadores->obtener(1);
+    jugadorPunto = jugadorCasilla;
 }
 
 
@@ -102,11 +107,53 @@ void TotitoChino::iniciarJuego() {
     auto* registro = new RegistroJugadores(creadorMatriz->getLimiteJugadores());
     jugadores = registro->registrarJugadores();
     imprimirInformacionJugadores();
-    imprimirTablero();
-    do {
-        procesadorOpciones->mostrarOpciones();
-        imprimirTablero();
-    }while (procesadorOpciones->getSeguirJugando());
     delete registro;
     delete creadorMatriz;
+    do {
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        std::cout<<std::endl;
+        imprimirTablero();
+        procesadorOpciones->mostrarOpciones();
+        cambiarTurno();
+    }while (procesadorOpciones->getSeguirJugando());
+}
+
+void TotitoChino::conectarLinea(int fila1, int columna1, int fila2, int columna2) {
+    bool horizontal = fila1 == fila2 && std::abs(columna1 - columna2) == 1;
+    bool vertical = columna1 == columna2 && std::abs(fila1 - fila2) == 1;
+    if (!vertical && !horizontal) {
+        std::cout << "No es posible conectar los puntos" << std::endl;
+        darTurnoExtra = true;
+        return;
+    }
+    int fila1real = fila1 * 2 - 1;
+    int columna1real = columna1 * 2 - 1;
+    int fila2real = fila2 * 2 - 1;
+    int columna2real = columna2 * 2 - 1;
+    Casilla *casillaPunto1 = tableroJuego->getElemento(fila1real, columna1real);
+    Casilla *casillaPunto2 = tableroJuego->getElemento(fila2real, columna2real);
+    if (casillaPunto1 == nullptr && casillaPunto2 == nullptr) {
+        std::cout << "Uno de los dos puntos ingresados no existen" << std::endl;
+        darTurnoExtra = true;
+        return;
+    }
+    int filalinea = (fila1real + fila2real)/2;
+    int columnalinea = (columna1real + columna2real)/2;
+    std::cout << filalinea << std::endl;
+    std::cout << columnalinea << std::endl;
+    Linea *linea = new Linea(vertical, jugadores->obtener(1));
+    Casilla *casilla = new Casilla(linea);
+    tableroJuego->agregar(casilla, filalinea, columnalinea);
+}
+
+void TotitoChino::cambiarTurno() {
+    if (!darTurnoExtra) {
+        Jugador *aux = jugadores->eliminar(1);
+        jugadores->agregar(aux);
+        jugadorCasilla = jugadores->obtener(1);
+        jugadorPunto = jugadorCasilla;
+    } else {
+        darTurnoExtra = false;
+    }
 }

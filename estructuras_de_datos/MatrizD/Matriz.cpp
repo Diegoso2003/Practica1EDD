@@ -88,6 +88,9 @@ Matriz<T>::~Matriz() {
 
 template<typename T>
 void Matriz<T>::agregar(T *elemento, int fila, int columna) {
+    if (fila <= 0 || columna <= 0) {
+        return;
+    }
     NodoMatriz<T> *nodoColumna = buscador->buscarColumna(columna, true);
     NodoMatriz<T> *nuevoNodo = new NodoMatriz<T>(elemento);
     nuevoNodo->setColumna(nodoColumna->getColumna());

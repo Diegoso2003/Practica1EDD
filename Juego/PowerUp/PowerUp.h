@@ -14,8 +14,8 @@ private:
     static const std::string simbolos[10];
     const std::string *simboloTablero;
 public:
-    PowerUp(int posicion);
-    virtual ~PowerUp(){}
+    explicit PowerUp(int posicion);
+    virtual ~PowerUp() = default;
     void imprimir();
 };
 

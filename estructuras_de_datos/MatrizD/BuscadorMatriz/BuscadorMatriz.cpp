@@ -8,9 +8,12 @@
 template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
     if (columna > this->matriz->getColumna()) {
-        this->matriz->getAgregador()->agregarNuevaColumnaDerecha(columna);
-        this->matriz->setColumna(columna);
-        return this->matriz->getUltimaColumna();
+        if (crear) {
+            this->matriz->getAgregador()->agregarNuevaColumnaDerecha(columna);
+            this->matriz->setColumna(columna);
+            return this->matriz->getUltimaColumna();
+        }
+        return nullptr;
     }
     int numero = this->matriz->getColumna() / 2;
     bool buscarInicio = numero > columna;
@@ -50,9 +53,12 @@ NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
 template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarFila(int fila, bool crear) {
     if (fila > this->matriz->getFila()) {
-        matriz->getAgregador()->agregarNuevaFilaAbajo(fila);
-        this->matriz->setFila(fila);
-        return this->matriz->getUltimaFila();
+        if (!crear) {
+            matriz->getAgregador()->agregarNuevaFilaAbajo(fila);
+            this->matriz->setFila(fila);
+            return this->matriz->getUltimaFila();
+        }
+        return nullptr;
     }
     int numero = this->matriz->getFila() / 2;
     bool buscarInicio = numero > fila;

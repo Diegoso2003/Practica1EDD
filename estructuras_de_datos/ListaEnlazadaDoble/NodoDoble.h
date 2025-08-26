@@ -12,7 +12,7 @@ private:
     NodoDoble<T>* anterior;
     NodoDoble<T>* siguiente;
 public:
-    NodoDoble(T* elemento);
+    explicit NodoDoble(T* elemento);
     NodoDoble<T>* getAnterior();
     NodoDoble<T>* getSiguiente();
     void setAnterior(NodoDoble<T>* anterior);

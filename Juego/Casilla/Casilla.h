@@ -17,9 +17,9 @@ private:
     Jugador *jugador;
     Linea *linea;
 public:
-    Casilla(PowerUp *powerUp): powerUp(powerUp), jugador(nullptr), linea(nullptr) {}
-    Casilla(Jugador *jugador): powerUp(nullptr), jugador(jugador), linea(nullptr) {}
-    Casilla(Linea *linea): linea(linea), powerUp(nullptr), jugador(nullptr) {}
+    explicit Casilla(PowerUp *powerUp): powerUp(powerUp), jugador(nullptr), linea(nullptr) {}
+    explicit Casilla(Jugador *jugador): powerUp(nullptr), jugador(jugador), linea(nullptr) {}
+    explicit Casilla(Linea *linea): linea(linea), powerUp(nullptr), jugador(nullptr) {}
     Casilla(): powerUp(nullptr), jugador(nullptr), linea(nullptr) {}
     ~Casilla();
     PowerUp *getPowerUp() {return powerUp;}

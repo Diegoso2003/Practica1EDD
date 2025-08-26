@@ -3,6 +3,7 @@
 //
 
 #include "Jugador.h"
+#include "../PowerUp/PowerUp.h"
 
 #include <iostream>
 

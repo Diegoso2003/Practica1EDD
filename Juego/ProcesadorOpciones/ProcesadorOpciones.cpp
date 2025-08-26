@@ -8,12 +8,17 @@
 #include <ostream>
 
 #include "../TotitoChino.h"
-#include "../ExtractorCoordenadas/ExtractorCoordenadas.h"
 #include "../Jugador/Jugador.h"
 
 ProcesadorOpciones::ProcesadorOpciones(TotitoChino *totitoChino) {
     this->totitoChino = totitoChino;
+    e = new ExtractorCoordenadas();
 }
+
+ProcesadorOpciones::~ProcesadorOpciones() {
+    delete e;
+}
+
 
 void ProcesadorOpciones::mostrarOpciones() {
     bool hayError = false;
@@ -58,7 +63,6 @@ void ProcesadorOpciones::procesarOpcion(int opcion) {
 }
 
 void ProcesadorOpciones::conectarLineas() {
-    ExtractorCoordenadas *e = new ExtractorCoordenadas();
     bool hayError = false;
     do {
         if (hayError) {
@@ -70,9 +74,5 @@ void ProcesadorOpciones::conectarLineas() {
         std::getline(std::cin, entrada);
         hayError = !e->extraerDatos(entrada);
     }while (hayError);
-    std::cout << "fila 1 ingresada: "<< e->getFila1() <<std::endl;
-    std::cout << "columna 1 ingresada: "<< e->getColumna1() <<std::endl;
-    std::cout << "fila 2 ingresada: "<< e->getFila2() <<std::endl;
-    std::cout << "columna 2 ingresada: "<< e->getColumna2() <<std::endl;
-    delete e;
+    totitoChino->conectarLinea(e->getFila1(), e->getColumna1(), e->getFila2(), e->getColumna2());
 }

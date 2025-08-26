@@ -10,9 +10,10 @@
 Linea::Linea(bool vertical, Jugador *dueño) {
     linea = vertical ? &lineaVertical : &lineaHorizontal;
     this->dueño = dueño;
+    powerUp = nullptr;
 }
 
 void Linea::imprimir() {
-    std::cout << Color::codigo(*dueño->getColor()) << linea << Color::codigo(Color::Tipo::RESET);
+    std::cout << Color::codigo(*dueño->getColor()) << *linea << Color::codigo(Color::Tipo::RESET);
 }
 

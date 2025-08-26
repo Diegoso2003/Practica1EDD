@@ -11,7 +11,7 @@ private:
     T *elemento;
     NodoSimple<T> *siguiente;
 public:
-    NodoSimple(T *elemento);
+    explicit NodoSimple(T *elemento);
     NodoSimple(T *elemento, NodoSimple<T> *siguiente);
     void setSiguiente(NodoSimple<T> *siguiente);
     NodoSimple<T> *getSiguiente() const;
