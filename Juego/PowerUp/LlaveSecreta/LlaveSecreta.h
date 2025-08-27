@@ -10,6 +10,7 @@
 class LlaveSecreta : public PowerUp{
 public:
     LlaveSecreta();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

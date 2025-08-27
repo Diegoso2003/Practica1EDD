@@ -10,6 +10,7 @@
 class Explosivo : public PowerUp{
 public:
     Explosivo();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

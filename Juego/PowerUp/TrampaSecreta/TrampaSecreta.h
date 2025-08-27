@@ -10,6 +10,7 @@
 class TrampaSecreta : public PowerUp{
 public:
     TrampaSecreta();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

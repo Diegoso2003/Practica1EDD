@@ -10,6 +10,7 @@
 class NuevasTierras : public PowerUp{
 public:
     NuevasTierras();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

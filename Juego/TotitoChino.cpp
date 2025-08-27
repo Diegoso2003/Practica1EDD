@@ -8,18 +8,21 @@
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
+#include "ManejadorPowerUp/ManejadorPowerUp.h"
 
-#include "Conversor/Conversor.h"
+#include "Conversor/Auxiliar.h"
 #include "VerificadorCuadros/VerificadorCuadros.h"
 
 TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr), jugadorPunto(nullptr), jugadorCasilla(nullptr) {
     procesadorOpciones = new ProcesadorOpciones(this);
+    manejador = new ManejadorPowerUp(this);
 }
 
 TotitoChino::~TotitoChino() {
     delete jugadores;
     delete tableroJuego;
     delete procesadorOpciones;
+    delete manejador;
 }
 
 void TotitoChino::imprimirInformacionJugadores() {
@@ -107,14 +110,15 @@ void TotitoChino::iniciarJuego() {
     darDescripcion();
     auto *creadorMatriz = new CreadorDeMatriz();
     tableroJuego = creadorMatriz->crearMatriz();
-    cuadradosDisponibles = (Conversor::numeroI(tableroJuego->getFila())-1)*
-        (Conversor::numeroI(tableroJuego->getColumna())-1);
+    cuadradosDisponibles = (Auxiliar::numeroI(tableroJuego->getFila())-1)*
+        (Auxiliar::numeroI(tableroJuego->getColumna())-1);
     auto* registro = new RegistroJugadores(creadorMatriz->getLimiteJugadores());
     jugadores = registro->registrarJugadores();
     imprimirInformacionJugadores();
     delete registro;
     delete creadorMatriz;
     do {
+        manejador->activarPowerUp();
         std::cout<<std::endl;
         std::cout<<std::endl;
         imprimirTablero();
@@ -139,10 +143,10 @@ void TotitoChino::conectarLinea(int fila1, int columna1, int fila2, int columna2
         imprimirAdvertencia("No es posible conectar los puntos");
         return;
     }
-    int fila1real = Conversor::coordenadaR(fila1);
-    int columna1real = Conversor::coordenadaR(columna1);
-    int fila2real = Conversor::coordenadaR(fila2);
-    int columna2real = Conversor::coordenadaR(columna2);
+    int fila1real = Auxiliar::coordenadaR(fila1);
+    int columna1real = Auxiliar::coordenadaR(columna1);
+    int fila2real = Auxiliar::coordenadaR(fila2);
+    int columna2real = Auxiliar::coordenadaR(columna2);
     NodoMatriz<Casilla> *casillaPunto1 = tableroJuego->getNodo(fila1real, columna1real);
     NodoMatriz<Casilla> *casillaPunto2 = tableroJuego->getNodo(fila2real, columna2real);
     if (casillaPunto1 == nullptr || casillaPunto2 == nullptr) {
@@ -179,9 +183,9 @@ void TotitoChino::imprimirAdvertencia(std::string mensaje) {
 
 void TotitoChino::verificarLinea(NodoMatriz<Casilla> *punto1, NodoMatriz<Casilla> *punto2) {
     VerificadorCuadros verificador;
-    bool vertical = esVertical(Conversor::numeroI(*punto1->getFila()),
-        Conversor::numeroI(*punto1->getColumna()), Conversor::numeroI(*punto2->getFila()),
-        Conversor::numeroI(*punto2->getColumna()));
+    bool vertical = esVertical(Auxiliar::numeroI(*punto1->getFila()),
+        Auxiliar::numeroI(*punto1->getColumna()), Auxiliar::numeroI(*punto2->getFila()),
+        Auxiliar::numeroI(*punto2->getColumna()));
     if (verificador.verificarConeccion(punto1, punto2, vertical)) {
         int fila = (*punto1->getFila()+*punto2->getFila())/2;
         int columna = (*punto2->getColumna()+*punto1->getColumna())/2;

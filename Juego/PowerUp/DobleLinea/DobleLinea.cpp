@@ -4,6 +4,9 @@
 
 #include "DobleLinea.h"
 
-DobleLinea::DobleLinea() : PowerUp(0){
+DobleLinea::DobleLinea() : PowerUp(0) {
+}
 
+void DobleLinea::realizarAccion(TotitoChino *juego) {
+    juego->setDarTurnoExtra(true);
 }

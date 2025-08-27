@@ -7,3 +7,7 @@
 Bloqueo::Bloqueo() : PowerUp(2){
 
 }
+
+void Bloqueo::realizarAccion(TotitoChino *juego) {
+
+}

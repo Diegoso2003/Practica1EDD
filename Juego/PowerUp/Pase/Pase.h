@@ -10,6 +10,7 @@
 class Pase : public PowerUp{
 public:
     Pase();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

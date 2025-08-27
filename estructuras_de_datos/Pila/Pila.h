@@ -4,6 +4,7 @@
 
 #ifndef PRACTICA1EDD_PILA_H
 #define PRACTICA1EDD_PILA_H
+#include "../../Iteradores/IteradorSimple/IteradorSimple.h"
 #include "NodoSimple/NodoSimple.h"
 
 template<typename T>
@@ -18,6 +19,7 @@ public:
     int getTamaño() const;
     void apilar(T *elemento);
     T *desapilar();
+    IteradorSimple<T> *getIteradorSimple(){return new IteradorSimple<T>(primeroEnSalir);}
 };
 
 #include "Pila.cpp"

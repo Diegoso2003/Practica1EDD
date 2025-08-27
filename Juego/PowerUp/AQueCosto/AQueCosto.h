@@ -10,6 +10,7 @@
 class AQueCosto : public PowerUp{
 public:
     AQueCosto();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

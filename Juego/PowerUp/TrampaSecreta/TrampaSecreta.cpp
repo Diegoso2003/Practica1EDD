@@ -6,3 +6,7 @@
 TrampaSecreta::TrampaSecreta() : PowerUp(1){
 
 }
+
+void TrampaSecreta::realizarAccion(TotitoChino *juego) {
+
+}

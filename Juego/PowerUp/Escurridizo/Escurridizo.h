@@ -10,6 +10,7 @@
 class Escurridizo : public PowerUp{
 public:
     Escurridizo();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

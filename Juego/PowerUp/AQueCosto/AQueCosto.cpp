@@ -7,3 +7,7 @@
 AQueCosto::AQueCosto() : PowerUp(7) {
 
 }
+
+void AQueCosto::realizarAccion(TotitoChino *juego) {
+
+}

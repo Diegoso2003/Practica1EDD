@@ -10,6 +10,7 @@
 class Bloqueo : public PowerUp{
 public:
     Bloqueo();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

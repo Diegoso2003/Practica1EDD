@@ -7,3 +7,7 @@
 Escurridizo::Escurridizo() : PowerUp(5) {
 
 }
+
+void Escurridizo::realizarAccion(TotitoChino *juego) {
+
+}

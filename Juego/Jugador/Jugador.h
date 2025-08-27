@@ -28,6 +28,7 @@ public:
     void imprimirJugador();
     void incrementarPunteo(int puntos);
     void agregarPowerUp(PowerUp *powerUp);
+    Pila<PowerUp> *getPila(){return poderes;}
 };
 
 

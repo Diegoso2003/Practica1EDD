@@ -6,3 +6,7 @@
 UnionAFuturo::UnionAFuturo() : PowerUp(6){
 
 }
+
+void UnionAFuturo::realizarAccion(TotitoChino *juego) {
+
+}

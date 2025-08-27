@@ -10,6 +10,7 @@
 class UnionAFuturo : public PowerUp{
 public:
     UnionAFuturo();
+    void realizarAccion(TotitoChino *juego) override;
 };
 
 

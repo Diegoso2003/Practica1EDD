@@ -7,3 +7,7 @@
 NuevasTierras::NuevasTierras() : PowerUp(8){
 
 }
+
+void NuevasTierras::realizarAccion(TotitoChino *juego) {
+
+}

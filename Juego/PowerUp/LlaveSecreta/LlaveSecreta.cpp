@@ -7,3 +7,7 @@
 LlaveSecreta::LlaveSecreta() : PowerUp(4){
 
 }
+
+void LlaveSecreta::realizarAccion(TotitoChino *juego) {
+
+}

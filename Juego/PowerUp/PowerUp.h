@@ -16,6 +16,7 @@ private:
 public:
     explicit PowerUp(int posicion);
     virtual ~PowerUp() = default;
+    virtual void realizarAccion(TotitoChino *juego) = 0;
     void imprimir();
 };
 

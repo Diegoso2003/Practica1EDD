@@ -8,6 +8,7 @@
 #include "CreadorDeMatriz/CreadorDeMatriz.h"
 #include "ProcesadorOpciones/ProcesadorOpciones.h"
 
+class ManejadorPowerUp;
 class Casilla;
 class Jugador;
 class TotitoChino {
@@ -15,6 +16,7 @@ private:
     Matriz<Casilla> *tableroJuego;
     ListaDobleEnlazada<Jugador> *jugadores;
     ProcesadorOpciones *procesadorOpciones;
+    ManejadorPowerUp *manejador;
     Jugador *jugadorPunto;
     Jugador *jugadorCasilla;
     int puntosOtorgados = 1;
@@ -37,6 +39,8 @@ public:
     void conectarLinea(int fila1, int columna1, int fila2, int columna2);
     void cambiarTurno();
     void setDarTurnoExtra(bool darTurnoExtra){this->darTurnoExtra =darTurnoExtra;}
+    bool getDarTurnoExtra() const {return darTurnoExtra;}
+    ManejadorPowerUp *getManejador() {return manejador;}
 };
 
 

@@ -7,3 +7,7 @@
 Explosivo::Explosivo() : PowerUp(9) {
 
 }
+
+void Explosivo::realizarAccion(TotitoChino *juego) {
+
+}

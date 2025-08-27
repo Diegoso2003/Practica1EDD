@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.10)
 project(Practica1EDD)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -73,6 +73,10 @@ add_executable(Practica1EDD main.cpp
         estructuras_de_datos/ColaEnlazada/ColaEnlazada.h
         Juego/VerificadorCuadros/VerificadorCuadros.cpp
         Juego/VerificadorCuadros/VerificadorCuadros.h
-        Juego/Conversor/Conversor.cpp
-        Juego/Conversor/Conversor.h
+        Juego/Conversor/Auxiliar.cpp
+        Juego/Conversor/Auxiliar.h
+        Iteradores/IteradorSimple/IteradorSimple.cpp
+        Iteradores/IteradorSimple/IteradorSimple.h
+        Juego/ManejadorPowerUp/ManejadorPowerUp.cpp
+        Juego/ManejadorPowerUp/ManejadorPowerUp.h
 )

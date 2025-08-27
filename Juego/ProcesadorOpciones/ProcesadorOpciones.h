@@ -22,7 +22,7 @@ public:
     void conectarLineas();
     bool getSeguirJugando() const {return seguirJugando;}
     void imprimirAdvertencia(std::string mensaje);
+    void mostrarPowerUpsobtenidos();
 };
-
 
 #endif //PRACTICA1EDD_PROCESADOROPCIONES_H

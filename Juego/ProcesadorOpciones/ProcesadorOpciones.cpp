@@ -9,6 +9,10 @@
 
 #include "../TotitoChino.h"
 #include "../Jugador/Jugador.h"
+#include "../../estructuras_de_datos/Pila/Pila.h"
+#include "../Conversor/Auxiliar.h"
+#include "../ManejadorPowerUp/ManejadorPowerUp.h"
+#include "../PowerUp/PowerUp.h"
 
 ProcesadorOpciones::ProcesadorOpciones(TotitoChino *totitoChino) {
     this->totitoChino = totitoChino;
@@ -39,7 +43,7 @@ void ProcesadorOpciones::mostrarOpciones() {
             size_t pos;
             numero = std::stoi(entrada, &pos);
             hayError = numero < 0 || numero > 3 || pos != entrada.size();
-        } catch (const std::exception& e) {
+        } catch (const std::exception &e) {
             hayError = true;
         }
     } while (hayError);
@@ -52,13 +56,13 @@ void ProcesadorOpciones::procesarOpcion(int opcion) {
             conectarLineas();
             break;
         case 2:
-            std::cout << std::endl;
+            mostrarPowerUpsobtenidos();
             break;
         case 3:
             this->seguirJugando = false;
             break;
         default:
-            std::cout << "otra opcion" <<std::endl;
+            std::cout << "otra opcion" << std::endl;
     }
 }
 
@@ -73,10 +77,37 @@ void ProcesadorOpciones::conectarLineas() {
         std::string entrada;
         std::getline(std::cin, entrada);
         hayError = !e->extraerDatos(entrada);
-    }while (hayError);
+    } while (hayError);
     totitoChino->conectarLinea(e->getFila1(), e->getColumna1(), e->getFila2(), e->getColumna2());
 }
 
 void ProcesadorOpciones::imprimirAdvertencia(std::string mensaje) {
-    std::cout<< Color::codigo(Color::Tipo::ROJO) <<mensaje << Color::codigo(Color::Tipo::RESET) <<std::endl;
+    std::cout << Color::codigo(Color::Tipo::ROJO) << mensaje << Color::codigo(Color::Tipo::RESET) << std::endl;
+}
+
+void ProcesadorOpciones::mostrarPowerUpsobtenidos() {
+    Pila<PowerUp> *pilaJugador = totitoChino->getJugadores()->obtener(1)->getPila();
+    if (pilaJugador->estaVacia()) {
+        std::cout << "No hay power ups para usar, presione enter para seguir" << std::endl;
+        std::cin.ignore();
+        std::cin.get();
+        totitoChino->setDarTurnoExtra(true);
+        return;
+    }
+    IteradorSimple<PowerUp> *iterador = pilaJugador->getIteradorSimple();
+    std::cout << "PowerUps acumulados(Solo se puede usar el primero)" << std::endl;
+    std::cout << "¿Usar primer power up? S/n" << std::endl;
+    while (iterador->haySiguiente()) {
+        iterador->getActual()->imprimir();
+        std::cout << " ";
+    }
+    std::cout << std::endl;
+    std::string entrada;
+    std::getline(std::cin, entrada);
+    entrada = Auxiliar::trim(entrada);
+    if (entrada == "S" || entrada == "s") {
+        PowerUp *powerUp = pilaJugador->desapilar();
+        totitoChino->getManejador()->setPowerUp(powerUp);
+    }
+    totitoChino->setDarTurnoExtra(true);
 }

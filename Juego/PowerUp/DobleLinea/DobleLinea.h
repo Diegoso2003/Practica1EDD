@@ -8,8 +8,10 @@
 
 
 class DobleLinea : public PowerUp{
+private:
 public:
     DobleLinea();
+    void realizarAccion(TotitoChino *juego);
 };
 
 
