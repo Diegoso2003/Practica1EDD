@@ -7,6 +7,9 @@
 
 
 class Conversor {
+public:
+    static int coordenadaR(int numero);
+    static int numeroI(int numero);
 };
 
 

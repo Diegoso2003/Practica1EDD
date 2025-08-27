@@ -20,6 +20,7 @@ public:
     NodoMatriz(T *elemento, int *fila, int *columna);
     NodoMatriz(T *elemento);
     ~NodoMatriz();
+    bool esNodoCabecera(){return this->elemento == nullptr;}
     int *getFila(){return fila;}
     int *getColumna(){return columna;}
     NodoMatriz<T> *getDerecha(){return derecha;}

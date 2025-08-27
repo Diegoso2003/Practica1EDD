@@ -39,3 +39,11 @@ void Jugador::imprimirJugador() {
     std::cout << Color::codigo(*this->color) << nombre << ", inicial: " << inicial << ", punteo: "
     <<puntos<< Color::codigo(Color::Tipo::RESET)<<std::endl;
 }
+
+void Jugador::agregarPowerUp(PowerUp *powerUp) {
+    poderes->apilar(powerUp);
+}
+
+void Jugador::incrementarPunteo(int puntos) {
+    this->puntos += puntos;
+}

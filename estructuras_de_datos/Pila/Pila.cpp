@@ -29,13 +29,13 @@ bool Pila<T>::estaVacia() const {
 }
 
 template<typename T>
-void Pila<T>::encolar(T *elemento) {
+void Pila<T>::apilar(T *elemento) {
     primeroEnSalir = new NodoSimple<T>(elemento, primeroEnSalir);
     tamaño++;
 }
 
 template<typename T>
-T *Pila<T>::desEncolar() {
+T *Pila<T>::desapilar() {
     if (estaVacia()) {
         return nullptr;
     }

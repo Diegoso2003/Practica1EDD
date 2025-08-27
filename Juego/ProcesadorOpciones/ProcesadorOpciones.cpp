@@ -66,7 +66,7 @@ void ProcesadorOpciones::conectarLineas() {
     bool hayError = false;
     do {
         if (hayError) {
-            std::cout << "Ingrese coordenadas validas" << std::endl;
+            imprimirAdvertencia("Ingrese coordenadas validas");
         }
         std::cout << "Ingrese las coordenadas de las lineas a unir" << std::endl;
         std::cout << "Usa: fila1,col1 -> fila2,col2" << std::endl;
@@ -75,4 +75,8 @@ void ProcesadorOpciones::conectarLineas() {
         hayError = !e->extraerDatos(entrada);
     }while (hayError);
     totitoChino->conectarLinea(e->getFila1(), e->getColumna1(), e->getFila2(), e->getColumna2());
+}
+
+void ProcesadorOpciones::imprimirAdvertencia(std::string mensaje) {
+    std::cout<< Color::codigo(Color::Tipo::ROJO) <<mensaje << Color::codigo(Color::Tipo::RESET) <<std::endl;
 }

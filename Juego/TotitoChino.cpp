@@ -9,6 +9,9 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "Conversor/Conversor.h"
+#include "VerificadorCuadros/VerificadorCuadros.h"
+
 TotitoChino::TotitoChino() : jugadores(nullptr), tableroJuego(nullptr), jugadorPunto(nullptr), jugadorCasilla(nullptr) {
     procesadorOpciones = new ProcesadorOpciones(this);
 }
@@ -61,7 +64,7 @@ void TotitoChino::imprimirTablero() {
     std::cout<<"Tablero:"<<std::endl;
     IteradorMatriz<Casilla> *casillas = tableroJuego->getIteradorMatriz();
     for (int i = 0; i <= tableroJuego->getFila(); i++) {
-        if (i == 1) {
+        if (i != 0 && i % 2 != 0) {
             std::cout << std::to_string((i+1)/2) << ((i+1)/2 < 10 ? "  " : " ");
         } else {
             std::cout << "   ";
@@ -104,6 +107,8 @@ void TotitoChino::iniciarJuego() {
     darDescripcion();
     auto *creadorMatriz = new CreadorDeMatriz();
     tableroJuego = creadorMatriz->crearMatriz();
+    cuadradosDisponibles = (Conversor::numeroI(tableroJuego->getFila())-1)*
+        (Conversor::numeroI(tableroJuego->getColumna())-1);
     auto* registro = new RegistroJugadores(creadorMatriz->getLimiteJugadores());
     jugadores = registro->registrarJugadores();
     imprimirInformacionJugadores();
@@ -112,39 +117,48 @@ void TotitoChino::iniciarJuego() {
     do {
         std::cout<<std::endl;
         std::cout<<std::endl;
-        std::cout<<std::endl;
         imprimirTablero();
         procesadorOpciones->mostrarOpciones();
         cambiarTurno();
-    }while (procesadorOpciones->getSeguirJugando());
+    }while (procesadorOpciones->getSeguirJugando() && cuadradosDisponibles > cuadrosTotales);
 }
 
+bool TotitoChino::esHorizontal(int fila1, int columna1, int fila2, int columna2) {
+    return fila1 == fila2 && std::abs(columna1 - columna2) == 1;
+}
+
+bool TotitoChino::esVertical(int fila1, int columna1, int fila2, int columna2) {
+    return columna1 == columna2 && std::abs(fila1 - fila2) == 1;
+}
+
+
 void TotitoChino::conectarLinea(int fila1, int columna1, int fila2, int columna2) {
-    bool horizontal = fila1 == fila2 && std::abs(columna1 - columna2) == 1;
-    bool vertical = columna1 == columna2 && std::abs(fila1 - fila2) == 1;
+    bool horizontal = esHorizontal(fila1, columna1, fila2, columna2);
+    bool vertical = esVertical(fila1, columna1, fila2, columna2);
     if (!vertical && !horizontal) {
-        std::cout << "No es posible conectar los puntos" << std::endl;
-        darTurnoExtra = true;
+        imprimirAdvertencia("No es posible conectar los puntos");
         return;
     }
-    int fila1real = fila1 * 2 - 1;
-    int columna1real = columna1 * 2 - 1;
-    int fila2real = fila2 * 2 - 1;
-    int columna2real = columna2 * 2 - 1;
-    Casilla *casillaPunto1 = tableroJuego->getElemento(fila1real, columna1real);
-    Casilla *casillaPunto2 = tableroJuego->getElemento(fila2real, columna2real);
-    if (casillaPunto1 == nullptr && casillaPunto2 == nullptr) {
-        std::cout << "Uno de los dos puntos ingresados no existen" << std::endl;
-        darTurnoExtra = true;
+    int fila1real = Conversor::coordenadaR(fila1);
+    int columna1real = Conversor::coordenadaR(columna1);
+    int fila2real = Conversor::coordenadaR(fila2);
+    int columna2real = Conversor::coordenadaR(columna2);
+    NodoMatriz<Casilla> *casillaPunto1 = tableroJuego->getNodo(fila1real, columna1real);
+    NodoMatriz<Casilla> *casillaPunto2 = tableroJuego->getNodo(fila2real, columna2real);
+    if (casillaPunto1 == nullptr || casillaPunto2 == nullptr) {
+        imprimirAdvertencia("Uno de los dos puntos ingresados no existen");
         return;
     }
     int filalinea = (fila1real + fila2real)/2;
     int columnalinea = (columna1real + columna2real)/2;
-    std::cout << filalinea << std::endl;
-    std::cout << columnalinea << std::endl;
-    Linea *linea = new Linea(vertical, jugadores->obtener(1));
-    Casilla *casilla = new Casilla(linea);
-    tableroJuego->agregar(casilla, filalinea, columnalinea);
+    if (tableroJuego->getElemento(filalinea, columnalinea) == nullptr) {
+        Linea *linea = new Linea(vertical, jugadores->obtener(1));
+        Casilla *casilla = new Casilla(linea);
+        tableroJuego->agregar(casilla, filalinea, columnalinea);
+        verificarLinea(casillaPunto1, casillaPunto2);
+    } else {
+        imprimirAdvertencia("No se puede ingresar una linea que ya este creada");
+    }
 }
 
 void TotitoChino::cambiarTurno() {
@@ -155,5 +169,39 @@ void TotitoChino::cambiarTurno() {
         jugadorPunto = jugadorCasilla;
     } else {
         darTurnoExtra = false;
+    }
+}
+
+void TotitoChino::imprimirAdvertencia(std::string mensaje) {
+    darTurnoExtra = true;
+    std::cout<< Color::codigo(Color::Tipo::ROJO) <<mensaje << Color::codigo(Color::Tipo::RESET) <<std::endl;
+}
+
+void TotitoChino::verificarLinea(NodoMatriz<Casilla> *punto1, NodoMatriz<Casilla> *punto2) {
+    VerificadorCuadros verificador;
+    bool vertical = esVertical(Conversor::numeroI(*punto1->getFila()),
+        Conversor::numeroI(*punto1->getColumna()), Conversor::numeroI(*punto2->getFila()),
+        Conversor::numeroI(*punto2->getColumna()));
+    if (verificador.verificarConeccion(punto1, punto2, vertical)) {
+        int fila = (*punto1->getFila()+*punto2->getFila())/2;
+        int columna = (*punto2->getColumna()+*punto1->getColumna())/2;
+        if (vertical) {
+            columna = verificador.esDerecha() ? columna+1 : columna-1;
+        } else {
+            fila = verificador.esArriba() ? fila-1 : fila+1;
+        }
+        Casilla *casilla = tableroJuego->getElemento(fila, columna);
+        if (casilla == nullptr) {
+            Casilla *casilla = new Casilla(jugadorCasilla);
+            tableroJuego->agregar(casilla, fila, columna);
+        } else {
+            PowerUp *power = casilla->getPowerUp();
+            jugadorCasilla->agregarPowerUp(power);
+            casilla->setJugador(jugadorCasilla);
+        }
+        jugadorPunto->incrementarPunteo(puntosOtorgados);
+        puntosOtorgados = 1;
+        cuadrosTotales++;
+        darTurnoExtra = true;
     }
 }

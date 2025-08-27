@@ -71,4 +71,8 @@ add_executable(Practica1EDD main.cpp
         Juego/ExtractorCoordenadas/ExtractorCoordenadas.h
         estructuras_de_datos/ColaEnlazada/ColaEnlazada.cpp
         estructuras_de_datos/ColaEnlazada/ColaEnlazada.h
+        Juego/VerificadorCuadros/VerificadorCuadros.cpp
+        Juego/VerificadorCuadros/VerificadorCuadros.h
+        Juego/Conversor/Conversor.cpp
+        Juego/Conversor/Conversor.h
 )

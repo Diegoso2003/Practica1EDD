@@ -26,6 +26,8 @@ public:
     char getInicial() const;
     void imprimir();
     void imprimirJugador();
+    void incrementarPunteo(int puntos);
+    void agregarPowerUp(PowerUp *powerUp);
 };
 
 

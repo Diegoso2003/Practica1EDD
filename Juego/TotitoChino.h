@@ -17,10 +17,17 @@ private:
     ProcesadorOpciones *procesadorOpciones;
     Jugador *jugadorPunto;
     Jugador *jugadorCasilla;
+    int puntosOtorgados = 1;
+    int cuadradosDisponibles = 0;
+    int cuadrosTotales = 0;
     bool darTurnoExtra = false;
+    bool esVertical(int fila1, int columna1, int fila2, int columna2);
+    bool esHorizontal(int fila1, int columna1, int fila2, int columna2);
     void darDescripcion();
     void imprimirTablero();
     void imprimirInformacionJugadores();
+    void imprimirAdvertencia(std::string mensaje);
+    void verificarLinea(NodoMatriz<Casilla> *punto1, NodoMatriz<Casilla> *punto2);
 public:
     TotitoChino();
     ~TotitoChino();

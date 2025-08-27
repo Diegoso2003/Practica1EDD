@@ -21,6 +21,7 @@ public:
     void mostrarOpciones();
     void conectarLineas();
     bool getSeguirJugando() const {return seguirJugando;}
+    void imprimirAdvertencia(std::string mensaje);
 };
 
 

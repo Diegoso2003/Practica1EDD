@@ -103,12 +103,22 @@ void Matriz<T>::agregar(T *elemento, int fila, int columna) {
 
 template<typename T>
 T *Matriz<T>::getElemento(int fila, int columna) {
+    NodoMatriz<T> *nodo = getNodo(fila, columna);
+    return nodo == nullptr ? nullptr : nodo->getElemento();
+}
+
+template<typename T>
+NodoMatriz<T> *Matriz<T>::getNodo(int fila, int columna) {
+    if (fila <= 0 || columna <= 0 || fila > this->fila || columna > this->columna) {
+        return nullptr;
+    }
     NodoMatriz<T> *nodoColumna = buscador->buscarColumna(columna, false);
     if (nodoColumna == nullptr) {return nullptr;}
     while (nodoColumna->getAbajo() != nullptr && *nodoColumna->getFila() < fila) {
         nodoColumna = nodoColumna->getAbajo();
     }
-    return *nodoColumna->getFila() == fila ? nodoColumna->getElemento() : nullptr;
+    return *nodoColumna->getFila() == fila ? nodoColumna : nullptr;
 }
+
 
 #endif

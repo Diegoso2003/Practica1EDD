@@ -22,12 +22,13 @@ public:
     explicit Casilla(Linea *linea): linea(linea), powerUp(nullptr), jugador(nullptr) {}
     Casilla(): powerUp(nullptr), jugador(nullptr), linea(nullptr) {}
     ~Casilla();
-    PowerUp *getPowerUp() {return powerUp;}
+    PowerUp *getPowerUp();
     Jugador *getJugador() {return jugador;}
     Linea *getLinea() {return linea;}
     void setJugador(Jugador *jugador) {this->jugador = jugador;}
     void setLinea(Linea *linea) {this->linea = linea;}
     void setPowerUp(PowerUp *powerUp) {this->powerUp = powerUp;}
+    bool esLinea(){return linea != nullptr;}
     void imprimir();
 };
 

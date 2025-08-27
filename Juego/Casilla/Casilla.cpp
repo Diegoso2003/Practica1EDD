@@ -10,10 +10,10 @@
 void Casilla::imprimir() {
     if (jugador != nullptr) {
         jugador->imprimir();
-    } else if (powerUp != nullptr) {
-        powerUp->imprimir();
     } else if (linea != nullptr) {
         linea->imprimir();
+    } else if (powerUp != nullptr) {
+        powerUp->imprimir();
     } else {
         std::cout << punto;
     }
@@ -24,3 +24,8 @@ Casilla::~Casilla() {
     delete powerUp;
 }
 
+PowerUp *Casilla::getPowerUp() {
+    PowerUp *aux = powerUp;
+    powerUp = nullptr;
+    return aux;
+}

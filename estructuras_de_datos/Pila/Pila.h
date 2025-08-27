@@ -16,8 +16,8 @@ public:
     ~Pila();
     bool estaVacia() const;
     int getTamaño() const;
-    void encolar(T *elemento);
-    T *desEncolar();
+    void apilar(T *elemento);
+    T *desapilar();
 };
 
 #include "Pila.cpp"

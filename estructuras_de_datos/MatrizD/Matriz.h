@@ -27,6 +27,7 @@ public:
     ~Matriz();
     bool estaVacia() const{return tamaño == 0;}
     T* getElemento(int fila, int columna);
+    NodoMatriz<T> *getNodo(int fila, int columna);
     IteradorMatriz<T> *getIteradorMatriz(){return new IteradorMatriz<T>(cabecera);}
     void agregar(T *elemento, int fila, int columna);
     int getFila() const{return fila;}
