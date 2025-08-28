@@ -126,7 +126,7 @@ void TotitoChino::iniciarJuego() {
         imprimirTablero();
         procesadorOpciones->mostrarOpciones();
         cambiarTurno();
-    }while (procesadorOpciones->getSeguirJugando() && cuadradosDisponibles > cuadrosTotales);
+    }while (procesadorOpciones->getSeguirJugando());
 }
 
 bool TotitoChino::esHorizontal(int fila1, int columna1, int fila2, int columna2) {
