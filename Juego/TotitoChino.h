@@ -41,6 +41,7 @@ public:
     void setDarTurnoExtra(bool darTurnoExtra){this->darTurnoExtra =darTurnoExtra;}
     bool getDarTurnoExtra() const {return darTurnoExtra;}
     ManejadorPowerUp *getManejador() {return manejador;}
+    void incrementarCuadros(int cuadros);
 };
 
 

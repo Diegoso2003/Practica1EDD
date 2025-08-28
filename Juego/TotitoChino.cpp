@@ -88,6 +88,8 @@ void TotitoChino::imprimirTablero() {
                         j = 1;
                         if (i % 2 != 0) {
                             std::cout << std::to_string((i+1)/2) << ((i+1)/2 < 10 ? "  " : " ");
+                        } else {
+                            std::cout << "   ";
                         }
                     }
                     while (columna != j) {
@@ -186,26 +188,37 @@ void TotitoChino::verificarLinea(NodoMatriz<Casilla> *punto1, NodoMatriz<Casilla
     bool vertical = esVertical(Auxiliar::numeroI(*punto1->getFila()),
         Auxiliar::numeroI(*punto1->getColumna()), Auxiliar::numeroI(*punto2->getFila()),
         Auxiliar::numeroI(*punto2->getColumna()));
-    if (verificador.verificarConeccion(punto1, punto2, vertical)) {
-        int fila = (*punto1->getFila()+*punto2->getFila())/2;
-        int columna = (*punto2->getColumna()+*punto1->getColumna())/2;
-        if (vertical) {
-            columna = verificador.esDerecha() ? columna+1 : columna-1;
-        } else {
-            fila = verificador.esArriba() ? fila-1 : fila+1;
+    bool agregado = false;
+    for (int i = 0; i < 2 ; i++) {
+        agregado = i == 0 ? verificador.verificarConeccionUnLado(punto1, punto2, vertical):
+        verificador.verificarConeccionOtroLado(punto1, punto2, vertical);
+        if (agregado) {
+            int fila = (*punto1->getFila()+*punto2->getFila())/2;
+            int columna = (*punto2->getColumna()+*punto1->getColumna())/2;
+            if (vertical) {
+                columna = verificador.esDerecha() ? columna+1 : columna-1;
+            } else {
+                fila = verificador.esArriba() ? fila-1 : fila+1;
+            }
+            Casilla *casilla = tableroJuego->getElemento(fila, columna);
+            if (casilla == nullptr) {
+                Casilla *casilla = new Casilla(jugadorCasilla);
+                tableroJuego->agregar(casilla, fila, columna);
+            } else {
+                PowerUp *power = casilla->getPowerUp();
+                jugadorCasilla->agregarPowerUp(power);
+                casilla->setJugador(jugadorCasilla);
+            }
+            jugadorPunto->incrementarPunteo(puntosOtorgados);
+            puntosOtorgados = 1;
+            cuadrosTotales++;
+            darTurnoExtra = true;
         }
-        Casilla *casilla = tableroJuego->getElemento(fila, columna);
-        if (casilla == nullptr) {
-            Casilla *casilla = new Casilla(jugadorCasilla);
-            tableroJuego->agregar(casilla, fila, columna);
-        } else {
-            PowerUp *power = casilla->getPowerUp();
-            jugadorCasilla->agregarPowerUp(power);
-            casilla->setJugador(jugadorCasilla);
-        }
-        jugadorPunto->incrementarPunteo(puntosOtorgados);
-        puntosOtorgados = 1;
-        cuadrosTotales++;
-        darTurnoExtra = true;
     }
+
+}
+
+void TotitoChino::incrementarCuadros(int cuadros) {
+    this->cuadradosDisponibles += cuadros;
+    std::cout << "cuadros totales: " << cuadros << std::endl;
 }

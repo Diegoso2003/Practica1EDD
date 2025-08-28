@@ -53,7 +53,7 @@ NodoMatriz<T> *BuscadorMatriz<T>::buscarColumna(int columna, bool crear) {
 template<typename T>
 NodoMatriz<T> *BuscadorMatriz<T>::buscarFila(int fila, bool crear) {
     if (fila > this->matriz->getFila()) {
-        if (!crear) {
+        if (crear) {
             matriz->getAgregador()->agregarNuevaFilaAbajo(fila);
             this->matriz->setFila(fila);
             return this->matriz->getUltimaFila();

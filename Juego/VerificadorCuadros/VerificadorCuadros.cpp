@@ -6,19 +6,29 @@
 
 #include "../Casilla/Casilla.h"
 
-bool VerificadorCuadros::verificarConeccion(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool vertical) {
+bool VerificadorCuadros::verificarConeccionUnLado(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool vertical) {
     if (vertical) {
         return verificarConeccionVertical(punto, punto2, true);
     }
     return verificarConeccionHorizonal(punto, punto2, true);
 }
 
+bool VerificadorCuadros::verificarConeccionOtroLado(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool vertical) {
+    this->derecha = false;
+    if (vertical) {
+        return verificarConeccionVertical(punto, punto2, false);
+    }
+    this->arriba = false;
+    return verificarConeccionHorizonal(punto, punto2, false);
+}
+
+
 bool VerificadorCuadros::verificarConeccionHorizonal(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool arriba) {
     NodoMatriz<Casilla> *aux1 = arriba ? punto->getArriba() : punto->getAbajo();
     NodoMatriz<Casilla> *aux2 = arriba ? punto2->getArriba() : punto2->getAbajo();
     if (aux1 == nullptr || aux2 == nullptr || !esNodoAceptado(aux1) || !esNodoAceptado(aux2)) {
         this->arriba = false;
-        return arriba ? verificarConeccionHorizonal(punto, punto2, false) : false;
+        return false;
     }
     aux1 = arriba ? aux1->getArriba() : aux1->getAbajo();
     if (*aux1->getColumna() < *aux2->getColumna()) {
@@ -34,7 +44,7 @@ bool VerificadorCuadros::verificarConeccionVertical(NodoMatriz<Casilla> *punto, 
     NodoMatriz<Casilla> *aux2 = derecha ? punto2->getDerecha() : punto2->getIzquierda();
     if (aux1 == nullptr || aux2 == nullptr || !esNodoAceptado(aux1) || !esNodoAceptado(aux2)) {
         this->derecha = false;
-        return derecha ? verificarConeccionVertical(punto, punto2, false) : false;
+        return false;
     }
     aux1 = derecha ? aux1->getDerecha() : aux1->getIzquierda();
     if (*aux1->getFila() < *aux2->getFila()) {

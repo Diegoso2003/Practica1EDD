@@ -120,5 +120,26 @@ NodoMatriz<T> *Matriz<T>::getNodo(int fila, int columna) {
     return *nodoColumna->getFila() == fila ? nodoColumna : nullptr;
 }
 
+template<typename T>
+void Matriz<T>::desplazarColumnas() {
+    NodoMatriz<T> *aux = cabecera;
+    while (aux->getDerecha() != nullptr) {
+        aux = aux->getDerecha();
+        int *columna = aux->getColumna();
+        (*columna) += 2;
+    }
+    columna = *ultimaColumna->getColumna();
+}
+
+template<typename T>
+void Matriz<T>::desplazarFilas() {
+    NodoMatriz<T> *aux = cabecera;
+    while (aux->getAbajo() != nullptr) {
+        aux = aux->getAbajo();
+        int *fila = aux->getFila();
+        (*fila) += 2;
+    }
+    fila = *ultimaFila->getFila();
+}
 
 #endif

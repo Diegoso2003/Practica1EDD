@@ -41,6 +41,8 @@ public:
     AgregadorMatriz<T> * getAgregador() const {return agregador;}
     void setFila(int fila){this->fila = fila;}
     void setColumna(int columna){this->columna = columna;}
+    void desplazarColumnas();
+    void desplazarFilas();
 };
 
 #include "Matriz.cpp"

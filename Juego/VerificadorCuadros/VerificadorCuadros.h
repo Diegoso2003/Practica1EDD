@@ -15,7 +15,8 @@ private:
     bool verificarConeccionHorizonal(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool arriba);
     bool verificarConeccionVertical(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool derecha);
 public:
-    bool verificarConeccion(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool vertical);
+    bool verificarConeccionUnLado(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool vertical);
+    bool verificarConeccionOtroLado(NodoMatriz<Casilla> *punto, NodoMatriz<Casilla> *punto2, bool vertical);
     bool esDerecha() {return derecha;}
     bool esArriba() {return arriba;}
 };
