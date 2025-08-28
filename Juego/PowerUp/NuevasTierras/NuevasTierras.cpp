@@ -113,18 +113,14 @@ void NuevasTierras::calcularNuevasCoordenadas() {
     derecha = derecha && (direccionesDisponibles == 1 || direccion == "derecha");
     izquierda = izquierda && (direccionesDisponibles == 1 || direccion == "izquierda");
     if (abajo || arriba) {
-        nuevasCasillas[0] = arriba ? fila : fila + 1;
-        nuevasCasillas[1] = columna != 1 ? columna: columna +1;
-        nuevasCasillas[2] = arriba ? fila : fila + 1;
-        nuevasCasillas[3] = columna != 1 ? columna + 1 : columna +2;
+        nuevasCasillas[0] = arriba ? fila: fila + 1;
+        nuevasCasillas[1] = columna == 1 ? columna + 1: columna;
+        nuevasCasillas[2] = arriba ? fila: fila + 1;
+        nuevasCasillas[3] = columna == 1 ? columna+2: columna+1;
         nuevasCasillas[4] = arriba ? fila : fila + 1;
-        nuevasCasillas[5] = columna != 1 ? columna - 1: columna;
+        nuevasCasillas[5] = columna == 1 ? columna: columna - 1;
         if (columna == 1) {
-            NodoMatriz<Casilla> *casilla = totito->getTableroJuego()->getNodo(Auxiliar::coordenadaR(nuevasCasillas[0]),
-                Auxiliar::coordenadaR(nuevasCasillas[1]));
-            if (casilla != nullptr) {
-                totito->getTableroJuego()->desplazarColumnas();
-            }
+            totito->getTableroJuego()->desplazarColumnas();
         }
         if (arriba) {
             totito->getTableroJuego()->desplazarFilas();
@@ -137,11 +133,7 @@ void NuevasTierras::calcularNuevasCoordenadas() {
         nuevasCasillas[4] = fila == 1 ? fila : fila - 1;
         nuevasCasillas[5] = izquierda ? columna : columna + 1;
         if (fila == 1) {
-            NodoMatriz<Casilla> *casilla = totito->getTableroJuego()->getNodo(Auxiliar::coordenadaR(nuevasCasillas[0]),
-                Auxiliar::coordenadaR(nuevasCasillas[1]));
-            if (casilla != nullptr) {
-                totito->getTableroJuego()->desplazarFilas();
-            }
+            totito->getTableroJuego()->desplazarFilas();
         }
         if (izquierda) {
             totito->getTableroJuego()->desplazarColumnas();
